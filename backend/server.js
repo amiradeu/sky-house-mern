@@ -21,6 +21,14 @@ connection.once("open", () => {
 app.use(cors());
 app.use(express.json());
 
+//import routers
+const housesRouter = require("./routes/houses");
+const ownersRouter = require("./routes/owners");
+
+//implement on app
+app.use("/houses", housesRouter);
+app.use("/owners", ownersRouter);
+
 //start listening
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
