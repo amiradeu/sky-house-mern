@@ -100,7 +100,7 @@ class UpdateHouse extends Component {
       )
       .then(res => console.log(res.data));
 
-    window.location = "/"; //return to home page
+    window.location = "/houses/"; //return to home page
   }
 
   render() {

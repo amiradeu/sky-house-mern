@@ -82,7 +82,7 @@ class AddHouse extends Component {
       .post("http://localhost:5000/houses/add", house)
       .then(res => console.log(res.data));
 
-    window.location = "/"; //return to home page
+    window.location = "/houses/"; //return to home page
   }
 
   render() {

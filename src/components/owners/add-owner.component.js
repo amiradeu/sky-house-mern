@@ -32,7 +32,7 @@ class CreateOwner extends Component {
       .post("http://localhost:5000/owners/add", owner)
       .then(res => console.log(res.data));
 
-    this.setState({ ownername: "" });
+    window.location = "/owners/";
   }
 
   render() {

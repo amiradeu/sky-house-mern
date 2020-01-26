@@ -40,11 +40,11 @@ router.route("/:id").get((req, res) => {
 //4th endpoint DELETE - /houses/:id
 router.route("/:id").delete((req, res) => {
   House.findByIdAndDelete(req.params.id)
-    .then(house => res.json("House deleted."))
+    .then(() => res.json("House deleted."))
     .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
-//4th endpoint POST - /houses/edit/:id
+//5th endpoint POST - /houses/edit/:id
 router.route("/edit/:id").post((req, res) => {
   House.findById(req.params.id)
     .then(house => {
