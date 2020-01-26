@@ -44,8 +44,8 @@ router.route("/:id").delete((req, res) => {
     .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
-//4th endpoint POST - /houses/update/:id
-router.route("/update/:id").post((req, res) => {
+//4th endpoint POST - /houses/edit/:id
+router.route("/edit/:id").post((req, res) => {
   House.findById(req.params.id)
     .then(house => {
       house.housename = req.body.housename;
