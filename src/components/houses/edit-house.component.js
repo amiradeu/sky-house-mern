@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+import { Form, Button } from "react-bootstrap";
 
 class UpdateHouse extends Component {
   constructor(props) {
@@ -105,37 +106,36 @@ class UpdateHouse extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h1>Edit {this.state.housename}</h1>
-        <div className="form-group">
-          <label>House</label>
-          <input
+      <Form onSubmit={this.handleSubmit}>
+        <h1>Edit House</h1>
+        <Form.Group>
+          <Form.Label>House</Form.Label>
+          <Form.Control
             required
             type="text"
             name="housename"
             value={this.state.housename}
             onChange={this.handleChangeHousename}
-            className="form-control"
           />
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Description</Form.Label>
+          <Form.Control
             required
+            as="textarea"
             name="description"
             value={this.state.description}
             onChange={this.handleChangeDescription}
-            className="form-control"
             rows="3"
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label>Owner name</label>
-          <select
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Owner name</Form.Label>
+          <Form.Control
+            as="select"
             name="ownername"
             value={this.state.ownername}
             onChange={this.handleChangeOwnername}
-            className="form-control"
           >
             {this.state.owners.map(owner => {
               return (
@@ -144,21 +144,20 @@ class UpdateHouse extends Component {
                 </option>
               );
             })}
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Location</label>
-          <input
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Location</Form.Label>
+          <Form.Control
             required
             type="number"
             name="location"
             value={this.state.location}
             onChange={this.handleChangeLocation}
-            className="form-control"
           />
-        </div>
-        <div className="form-group">
-          <label>Date</label>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Date Purchased</Form.Label>
           <div>
             <DatePicker
               required
@@ -166,9 +165,9 @@ class UpdateHouse extends Component {
               onChange={this.handleChangeDatePurchased}
             />
           </div>
-        </div>
-        <button className="btn btn-primary">Save Changes</button>
-      </form>
+        </Form.Group>
+        <Button className="btn btn-primary">Save Changes</Button>
+      </Form>
     );
   }
 }

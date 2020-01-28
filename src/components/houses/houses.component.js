@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import House from "./house-item.component";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Container, Row, Col, Button } from "react-bootstrap";
 
 class Houses extends Component {
   constructor(props) {
@@ -35,18 +35,22 @@ class Houses extends Component {
   render() {
     let houseList = this.state.houses.map(house => {
       return (
-        <House key={house._id} house={house} deleteHouse={this.deleteHouse} />
+        <Col key={house._id} lg={4} md={6} className="mb-5">
+          <House house={house} deleteHouse={this.deleteHouse} />
+        </Col>
       );
     });
 
     return (
-      <div>
-        <h1>Houses</h1>
-        <Link to="/houses/add/" className="btn btn-dark">
-          ADD new house
-        </Link>
-        {houseList}
-      </div>
+      <Container>
+        <Row>
+          <h1>Houses</h1>
+          <Button href="/houses/add/" className="m-2" variant="warning">
+            ADD new house
+          </Button>
+        </Row>
+        <Row>{houseList}</Row>
+      </Container>
     );
   }
 }

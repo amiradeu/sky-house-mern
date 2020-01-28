@@ -1,41 +1,39 @@
 import React from "react";
 import houseImg from "../../house_svg/house-building-1.svg";
-import { Link } from "react-router-dom";
+import { Card, Button } from "react-bootstrap";
 
 function House(props) {
   return (
-    <div className="card" style={{ width: "18rem" }}>
-      <img
-        className="card-img-top"
+    <Card className="h-100" style={{ width: "18rem" }} bg="light">
+      <Card.Header as="h5">{props.house.ownername}</Card.Header>
+      <Card.Img
+        variant="top"
         src={houseImg}
         alt="house"
         width="280"
         height="180"
-      ></img>
-      <div className="card-body">
-        <h5 className="card-title">{props.house.housename}</h5>
-        <p className="card-text">{props.house.description}</p>
-        <ul>
-          <li>{props.house.ownername}</li>
-          <li>{props.house.location}</li>
-          <li>{props.house.datePurchased.substring(0, 10)}</li>
-        </ul>
-        <Link
-          to={"/houses/edit/" + props.house._id}
-          className="btn btn-primary"
-        >
+      />
+      <Card.Body>
+        <Card.Title className="text-center text-uppercase">
+          {props.house.housename}
+        </Card.Title>
+        <Card.Subtitle className="text-center">
+          {props.house.location} || {props.house.datePurchased.substring(0, 10)}
+        </Card.Subtitle>
+        <Card.Text>{props.house.description}</Card.Text>
+        <a className="m-3" href={"/houses/edit/" + props.house._id}>
           Edit
-        </Link>
-        <button
-          className="btn btn-danger"
+        </a>
+        <Button
+          variant="danger"
           onClick={() => {
             props.deleteHouse(props.house._id);
           }}
         >
           Delete
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Card.Body>
+    </Card>
   );
 }
 

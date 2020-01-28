@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Form, Button } from "react-bootstrap";
 
 class CreateOwner extends Component {
   constructor(props) {
@@ -37,23 +38,21 @@ class CreateOwner extends Component {
 
   render() {
     return (
-      <div>
+      <Form onSubmit={this.handleSubmit}>
         <h1>Create New Owner</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label>Owner</label>
-            <input
-              required
-              type="text"
-              name="ownername"
-              value={this.state.ownername}
-              onChange={this.handleChangeOwnername}
-              className="form-control"
-            />
-          </div>
-          <button className="btn btn-primary">Create Owner</button>
-        </form>
-      </div>
+        <Form.Group>
+          <Form.Label>Owner</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            name="ownername"
+            value={this.state.ownername}
+            onChange={this.handleChangeOwnername}
+            placeholder="Enter owner name"
+          />
+        </Form.Group>
+        <Button variant="primary">Create Owner</Button>
+      </Form>
     );
   }
 }
