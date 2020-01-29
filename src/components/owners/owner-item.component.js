@@ -1,16 +1,21 @@
 import React from "react";
-import ownerImg from "../../house_svg/fan.svg";
+import ownerImg from "../../imgs/user.jpg";
 import { Card, Button } from "react-bootstrap";
+import { MdLocationOn } from "react-icons/md";
+import { FaRegEdit } from "react-icons/fa";
 
 function OwnerItem(props) {
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card className="m-3">
+      <Card.Header as="h5" className="rounded-0">
+        <MdLocationOn className="mr-1" size={16}></MdLocationOn>
+        location
+      </Card.Header>
       <Card.Img
-        className="card-img-top"
+        variant="top"
+        className="rounded-circle p-1 mx-auto d-block"
         src={ownerImg}
-        alt="house"
-        width="280"
-        height="180"
+        alt="owner"
       ></Card.Img>
       <Card.Body>
         <Card.Title className="text-center text-capitalize">
@@ -19,21 +24,28 @@ function OwnerItem(props) {
         <Card.Text>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
           ad distinctio dicta, quas neque, nisi beatae quisquam eveniet
-          laboriosam unde aliquam at illo sed! Incidunt debitis odit ea
-          consequuntur officia?
+          laboriosam unde aliquam
         </Card.Text>
-        <a className="m-3" href={"/owners/edit/" + props.owner._id}>
-          Edit
-        </a>
-        <Button
-          variant="danger"
-          onClick={() => {
-            props.deleteOwner(props.owner._id);
-          }}
-        >
-          Delete
-        </Button>
       </Card.Body>
+      <Card.Footer className="rounded-0">
+        <div className="float-right">
+          <a
+            className="mx-3 editHouse"
+            href={"/owners/edit/" + props.owner._id}
+          >
+            <FaRegEdit className="mr-1"></FaRegEdit>
+            Edit
+          </a>
+          <Button
+            variant="dark"
+            onClick={() => {
+              props.deleteOwner(props.owner._id);
+            }}
+          >
+            Delete
+          </Button>
+        </div>
+      </Card.Footer>
     </Card>
   );
 }

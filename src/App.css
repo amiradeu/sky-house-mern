@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,900&display=swap");
+
+body {
+  background-color: #dcdcdc;
+}
+
+#root {
+  font-family: "Montserrat", sans-serif;
+  min-width: 320px;
+}
+
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+.card-header,
+/* .card-img-top .rounded-circle, */
+.card-body,
+.card-footer {
+  background-color: white;
+  color: #0a0a09;
+}
+
+.card-header {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.card-img-top {
+  height: 150px;
+  width: 150px;
+}
+.card-title {
+  font-weight: 600;
+}
+
+.card-subtitle {
+  font-size: 10px;
+}
+
+.card-body {
+  padding: 0.5rem;
+}
+.card-text {
+  font-weight: 300;
+  text-align: left;
+}
+
+.card-footer {
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #c9b3a7;
+  color: white;
+  border-color: #c9b3a7;
+}
+
+.editHouse {
+  color: #c9b3a7;
+  text-transform: lowercase;
+}
+
+.editHouse:hover {
+  color: #0a0a09;
+  text-decoration: none;
+}

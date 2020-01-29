@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
+
 import Owner from "./owner-item.component";
-import { Container, Row, Col, Button } from "react-bootstrap";
+
+import { Button, CardDeck } from "react-bootstrap";
+import { MdAddCircle } from "react-icons/md";
 
 class Owners extends Component {
   constructor(props) {
@@ -30,21 +33,16 @@ class Owners extends Component {
 
   render() {
     let ownerList = this.state.owners.map(owner => (
-      <Col key={owner._id} lg={4} md={6} className="mb-5">
-        <Owner owner={owner} deleteOwner={this.deleteOwner} />
-      </Col>
+      <Owner key={owner._id} owner={owner} deleteOwner={this.deleteOwner} />
     ));
 
     return (
-      <Container>
-        <Row>
-          <h1>Owners</h1>
-          <Button href="/owners/add/" className="m-2" variant="warning">
-            ADD new owner
-          </Button>
-        </Row>
-        <Row>{ownerList}</Row>
-      </Container>
+      <React.Fragment>
+        <Button href="/owners/add/" className="mt-3" variant="dark">
+          <MdAddCircle className="mr-1"></MdAddCircle>new owner
+        </Button>
+        <CardDeck>{ownerList}</CardDeck>
+      </React.Fragment>
     );
   }
 }

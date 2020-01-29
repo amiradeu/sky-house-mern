@@ -1,5 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
@@ -11,13 +13,15 @@ import Owners from "./components/owners/owners.component";
 import AddOwner from "./components/owners/add-owner.component";
 import EditOwner from "./components/owners/edit-owner.component";
 import About from "./components/about.component";
+import Map from "./components/map.component";
 
 function App() {
   return (
     <Router>
       <React.Fragment>
         <Navbar />
-        <Container>
+        <Container fluid>
+          <Route path="/" exact component={Map} />
           <Route path="/houses/" exact component={Houses} />
           <Route path="/houses/add" exact component={AddHouse} />
           <Route path="/houses/edit/:id" component={EditHouse} />

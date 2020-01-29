@@ -67,7 +67,9 @@ class EditOwner extends Component {
             placeholder="Enter owner name"
           />
         </Form.Group>
-        <Button variant="primary">Save Changes</Button>
+        <Button variant="dark" type="submit">
+          Save Changes
+        </Button>
       </Form>
     );
   }

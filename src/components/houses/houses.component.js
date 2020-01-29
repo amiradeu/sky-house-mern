@@ -1,7 +1,10 @@
 import React, { Component } from "react";
-import House from "./house-item.component";
 import axios from "axios";
-import { Container, Row, Col, Button } from "react-bootstrap";
+
+import House from "./house-item.component";
+
+import { Button, CardDeck } from "react-bootstrap";
+import { MdAddCircle } from "react-icons/md";
 
 class Houses extends Component {
   constructor(props) {
@@ -35,22 +38,17 @@ class Houses extends Component {
   render() {
     let houseList = this.state.houses.map(house => {
       return (
-        <Col key={house._id} lg={4} md={6} className="mb-5">
-          <House house={house} deleteHouse={this.deleteHouse} />
-        </Col>
+        <House key={house._id} house={house} deleteHouse={this.deleteHouse} />
       );
     });
 
     return (
-      <Container>
-        <Row>
-          <h1>Houses</h1>
-          <Button href="/houses/add/" className="m-2" variant="warning">
-            ADD new house
-          </Button>
-        </Row>
-        <Row>{houseList}</Row>
-      </Container>
+      <React.Fragment>
+        <Button href="/houses/add/" className="mt-3" variant="dark">
+          <MdAddCircle className="mr-1"></MdAddCircle>new house
+        </Button>
+        <CardDeck>{houseList}</CardDeck>
+      </React.Fragment>
     );
   }
 }

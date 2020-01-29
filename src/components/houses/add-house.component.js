@@ -148,7 +148,9 @@ class AddHouse extends Component {
             />
           </div>
         </Form.Group>
-        <Button className="btn btn-primary">Add House</Button>
+        <Button variant="dark" type="submit">
+          Add House
+        </Button>
       </Form>
     );
   }

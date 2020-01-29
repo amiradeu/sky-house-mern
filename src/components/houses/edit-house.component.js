@@ -166,7 +166,9 @@ class UpdateHouse extends Component {
             />
           </div>
         </Form.Group>
-        <Button className="btn btn-primary">Save Changes</Button>
+        <Button variant="dark" type="submit">
+          Save Changes
+        </Button>
       </Form>
     );
   }

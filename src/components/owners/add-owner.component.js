@@ -51,7 +51,9 @@ class CreateOwner extends Component {
             placeholder="Enter owner name"
           />
         </Form.Group>
-        <Button variant="primary">Create Owner</Button>
+        <Button variant="dark" type="submit">
+          Create Owner
+        </Button>
       </Form>
     );
   }
