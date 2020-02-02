@@ -1,5 +1,4 @@
 import React from "react";
-import houseImg from "../../imgs/house.jpg";
 import { Card, Button } from "react-bootstrap";
 import { MdLocationOn } from "react-icons/md";
 import { FaUserAlt, FaCalendarDay, FaRegEdit } from "react-icons/fa";
@@ -25,7 +24,7 @@ function House(props) {
       </Card.Header>
       <Card.Img
         variant="top"
-        src={houseImg}
+        src={props.house.imgsrc}
         alt="house"
         className="rounded-circle m-2 mx-auto d-block"
       />

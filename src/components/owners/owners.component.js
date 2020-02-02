@@ -16,6 +16,7 @@ class Owners extends Component {
   }
   componentDidMount() {
     axios.get("http://localhost:5000/owners").then(res => {
+      console.log(res.data);
       this.setState({
         owners: res.data
       });

@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
+import { toJson } from "unsplash-js";
 
 class AddHouse extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class AddHouse extends Component {
       ownername: "",
       location: 0,
       datePurchased: new Date(),
+      imgsrc: "",
       owners: [] //list of owners to choose to associate to a house
     };
 
@@ -23,9 +25,12 @@ class AddHouse extends Component {
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeDatePurchased = this.handleChangeDatePurchased.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onCreateHouse = this.onCreateHouse.bind(this);
   }
 
   componentDidMount() {
+    this.onCreateHouse();
+
     axios.get("http://localhost:5000/owners/").then(res => {
       if (res.data.length > 0) {
         this.setState({
@@ -35,6 +40,22 @@ class AddHouse extends Component {
       }
     });
   }
+
+  onCreateHouse = async () => {
+    const Unsplash = require("unsplash-js").default;
+    const unsplash = new Unsplash({
+      accessKey:
+        "deae7f34b9ec4523e01028165bb668fc1ce16f8878ef5e36d21ff6654b75ac10"
+    });
+
+    await unsplash.photos
+      .getRandomPhoto({ query: "house" })
+      .then(toJson)
+      .then(json => {
+        console.log(json);
+        this.setState({ imgsrc: json.urls.regular });
+      });
+  };
 
   handleChangeHousename(e) {
     this.setState({
@@ -74,7 +95,8 @@ class AddHouse extends Component {
       description: this.state.description,
       ownername: this.state.ownername,
       location: this.state.location,
-      datePurchased: this.state.datePurchased
+      datePurchased: this.state.datePurchased,
+      imgsrc: this.state.imgsrc
     };
 
     console.log(house);
@@ -132,7 +154,7 @@ class AddHouse extends Component {
           <Form.Label>Location</Form.Label>
           <Form.Control
             required
-            type="number"
+            type="text"
             name="location"
             value={this.state.location}
             onChange={this.handleChangeLocation}
@@ -147,6 +169,10 @@ class AddHouse extends Component {
               onChange={this.handleChangeDatePurchased}
             />
           </div>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Image Source</Form.Label>
+          <Form.Control required readOnly value={this.state.imgsrc} />
         </Form.Group>
         <Button variant="dark" type="submit">
           Add House

@@ -11,7 +11,8 @@ const ownerSchema = new Schema(
       unique: true,
       trim: true,
       minlength: 3
-    }
+    },
+    imgsrc: { type: String, required: true }
   },
   {
     timestamps: true

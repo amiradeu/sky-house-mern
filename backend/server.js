@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose"); //help connect to mongoDB database
 
-//store environment variable in .md file
+//store environment variable in .env file
 require("dotenv").config();
 
 //create express server

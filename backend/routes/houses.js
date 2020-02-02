@@ -13,15 +13,17 @@ router.route("/add").post((req, res) => {
   const housename = req.body.housename;
   const ownername = req.body.ownername;
   const description = req.body.description;
-  const location = Number(req.body.location);
+  const location = req.body.location;
   const datePurchased = Date.parse(req.body.datePurchased);
+  const imgsrc = req.body.imgsrc;
 
   const newHouse = new House({
     housename,
     ownername,
     description,
     location,
-    datePurchased
+    datePurchased,
+    imgsrc
   });
 
   newHouse
@@ -51,8 +53,9 @@ router.route("/edit/:id").post((req, res) => {
       house.housename = req.body.housename;
       house.ownername = req.body.ownername;
       house.description = req.body.description;
-      house.location = Number(req.body.location);
+      house.location = req.body.location;
       house.datePurchased = Date.parse(req.body.datePurchased);
+      imgsrc = req.body.imgsrc;
 
       house
         .save()

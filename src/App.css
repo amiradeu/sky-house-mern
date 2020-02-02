@@ -16,7 +16,6 @@ body {
 }
 
 .card-header,
-/* .card-img-top .rounded-circle, */
 .card-body,
 .card-footer {
   background-color: white;
@@ -33,6 +32,7 @@ body {
   height: 150px;
   width: 150px;
 }
+
 .card-title {
   font-weight: 600;
 }

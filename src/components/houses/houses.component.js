@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-
 import House from "./house-item.component";
 
 import { Button, CardDeck } from "react-bootstrap";
@@ -10,7 +9,8 @@ class Houses extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      houses: []
+      houses: [],
+      imgsrc: []
     };
     this.deleteHouse = this.deleteHouse.bind(this);
   }

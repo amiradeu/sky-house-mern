@@ -1,0 +1,40 @@
+.popover {
+  max-width: 95vw;
+}
+
+/* HIDE RADIO */
+[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+[type="radio"] + img {
+  cursor: pointer;
+}
+
+[type="radio"]:checked + img {
+  border: 2px solid #0a0a09;
+}
+
+img:hover {
+  border: 2px solid #c9b3a7;
+}
+
+.popover-body {
+  overflow-y: auto;
+  height: 50vh;
+}
+
+.apiImg {
+  height: 100px;
+  width: 100px;
+}
+
+@media (max-width: 500px) {
+  .apiImg {
+    height: 80px;
+    width: 80px;
+  }
+}

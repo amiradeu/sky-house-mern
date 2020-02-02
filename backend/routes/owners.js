@@ -11,8 +11,9 @@ router.route("/").get((req, res) => {
 //2nd HTTP POST req endpoint - /owners/add
 router.route("/add").post((req, res) => {
   const ownername = req.body.ownername;
+  const imgsrc = req.body.imgsrc;
 
-  const newOwner = new Owner({ ownername });
+  const newOwner = new Owner({ ownername, imgsrc });
 
   newOwner
     .save()
@@ -39,6 +40,7 @@ router.route("/edit/:id").post((req, res) => {
   Owner.findById(req.params.id)
     .then(owner => {
       owner.ownername = req.body.ownername;
+      owner.imgsrc = req.body.imgsrc;
       owner
         .save()
         .then(() => res.json("Owner updated!"))

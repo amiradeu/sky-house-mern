@@ -8,8 +8,9 @@ const houseSchema = new Schema(
     housename: { type: String, required: true },
     ownername: { type: String, required: false },
     description: { type: String, required: true },
-    location: { type: Number, required: true },
-    datePurchased: { type: Date, required: true }
+    location: { type: String, required: true },
+    datePurchased: { type: Date, required: true },
+    imgsrc: { type: String, required: true }
   },
   {
     timestamps: true

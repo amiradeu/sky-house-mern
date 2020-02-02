@@ -1,5 +1,4 @@
 import React from "react";
-import ownerImg from "../../imgs/user.jpg";
 import { Card, Button } from "react-bootstrap";
 import { MdLocationOn } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
@@ -14,7 +13,7 @@ function OwnerItem(props) {
       <Card.Img
         variant="top"
         className="rounded-circle p-1 mx-auto d-block"
-        src={ownerImg}
+        src={props.owner.imgsrc}
         alt="owner"
       ></Card.Img>
       <Card.Body>
