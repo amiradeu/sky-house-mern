@@ -9,8 +9,8 @@ import {
   Image
 } from "react-bootstrap";
 import { toJson } from "unsplash-js";
-import "./owner.css";
-import addOwnerLogo from "../../imgs/add.png";
+import "../models.css";
+import addOwnerLogo from "../../assets/images/add.png";
 
 const unsplash_api = process.env.REACT_APP_UNSPLASH_API;
 
@@ -39,7 +39,6 @@ class CreateOwner extends Component {
       .photos("headshot people", 3, 100)
       .then(toJson)
       .then(json => {
-        console.log(json.results);
         this.setState({ imglist: json.results });
       });
   };
@@ -65,8 +64,6 @@ class CreateOwner extends Component {
       ownername: this.state.ownername,
       imgsrc: this.state.imgsrc
     };
-
-    console.log(owner);
 
     axios
       .post("http://localhost:5000/owners/add", owner)

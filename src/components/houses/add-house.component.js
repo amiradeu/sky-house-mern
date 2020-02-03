@@ -2,8 +2,18 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Col,
+  Image,
+  OverlayTrigger,
+  Popover
+} from "react-bootstrap";
 import { toJson } from "unsplash-js";
+import addOwnerLogo from "../../assets/images/add.png";
+
+const unsplash_api = process.env.REACT_APP_UNSPLASH_API;
 
 class AddHouse extends Component {
   constructor(props) {
@@ -15,7 +25,8 @@ class AddHouse extends Component {
       ownername: "",
       location: 0,
       datePurchased: new Date(),
-      imgsrc: "",
+      imgsrc: addOwnerLogo,
+      imglist: [],
       owners: [] //list of owners to choose to associate to a house
     };
 
@@ -24,6 +35,7 @@ class AddHouse extends Component {
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeDatePurchased = this.handleChangeDatePurchased.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onCreateHouse = this.onCreateHouse.bind(this);
   }
@@ -44,16 +56,14 @@ class AddHouse extends Component {
   onCreateHouse = async () => {
     const Unsplash = require("unsplash-js").default;
     const unsplash = new Unsplash({
-      accessKey:
-        "deae7f34b9ec4523e01028165bb668fc1ce16f8878ef5e36d21ff6654b75ac10"
+      accessKey: unsplash_api
     });
 
-    await unsplash.photos
-      .getRandomPhoto({ query: "house" })
+    await unsplash.search
+      .photos("house", 3, 100)
       .then(toJson)
       .then(json => {
-        console.log(json);
-        this.setState({ imgsrc: json.urls.regular });
+        this.setState({ imglist: json.results });
       });
   };
 
@@ -87,6 +97,10 @@ class AddHouse extends Component {
     });
   }
 
+  handleChangeImage(e) {
+    this.setState({ imgsrc: e.target.value });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -99,8 +113,6 @@ class AddHouse extends Component {
       imgsrc: this.state.imgsrc
     };
 
-    console.log(house);
-
     axios
       .post("http://localhost:5000/houses/add", house)
       .then(res => console.log(res.data));
@@ -109,75 +121,116 @@ class AddHouse extends Component {
   }
 
   render() {
+    let imagelist = this.state.imglist.map(src => {
+      return src;
+    });
+    const popover = (
+      <Popover id="popover-positioned-bottom">
+        <Popover.Title as="h3">Choose image</Popover.Title>
+        <Popover.Content>
+          <Col>
+            {imagelist.map(src => (
+              <React.Fragment key={src.id}>
+                <label>
+                  <input
+                    type="radio"
+                    name="img"
+                    value={src.urls.regular}
+                    onChange={this.handleChangeImage}
+                  />
+                  <Image
+                    src={src.urls.regular}
+                    className="rounded-circle p-2 apiImg"
+                  ></Image>
+                </label>
+              </React.Fragment>
+            ))}
+          </Col>
+        </Popover.Content>
+      </Popover>
+    );
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <React.Fragment>
         <h1>Add New House</h1>
-        <Form.Group>
-          <Form.Label>House</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="housename"
-            value={this.state.housename}
-            onChange={this.handleChangeHousename}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            required
-            as="textarea"
-            name="description"
-            value={this.state.description}
-            onChange={this.handleChangeDescription}
-            rows="3"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Owner name</Form.Label>
-          <Form.Control
-            as="select"
-            name="ownername"
-            value={this.state.ownername}
-            onChange={this.handleChangeOwnername}
-          >
-            {this.state.owners.map(owner => {
-              return (
-                <option key={owner} value={owner}>
-                  {owner}
-                </option>
-              );
-            })}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Location</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="location"
-            value={this.state.location}
-            onChange={this.handleChangeLocation}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Date Purchased</Form.Label>
-          <div>
-            <DatePicker
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Row>
+            <Form.Group as={Col} md="8">
+              <Form.Label>House</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="housename"
+                value={this.state.housename}
+                onChange={this.handleChangeHousename}
+              />
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                required
+                as="textarea"
+                name="description"
+                value={this.state.description}
+                onChange={this.handleChangeDescription}
+                rows="3"
+              />
+            </Form.Group>
+            <Form.Group as={Col} md="4">
+              <Image
+                src={this.state.imgsrc}
+                className="rounded-circle p-2 apiImg"
+              ></Image>
+              <br />
+              <OverlayTrigger
+                trigger="click"
+                key="bottom"
+                placement="bottom"
+                overlay={popover}
+              >
+                <Button variant="dark">Choose house</Button>
+              </OverlayTrigger>
+            </Form.Group>
+          </Form.Row>
+          <Form.Group>
+            <Form.Label>Owner name</Form.Label>
+            <Form.Control
+              as="select"
+              name="ownername"
+              value={this.state.ownername}
+              onChange={this.handleChangeOwnername}
+            >
+              {this.state.owners.map(owner => {
+                return (
+                  <option key={owner} value={owner}>
+                    {owner}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Location</Form.Label>
+            <Form.Control
               required
-              selected={this.state.datePurchased}
-              onChange={this.handleChangeDatePurchased}
+              type="text"
+              name="location"
+              value={this.state.location}
+              onChange={this.handleChangeLocation}
             />
-          </div>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Image Source</Form.Label>
-          <Form.Control required readOnly value={this.state.imgsrc} />
-        </Form.Group>
-        <Button variant="dark" type="submit">
-          Add House
-        </Button>
-      </Form>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Date Purchased</Form.Label>
+            <div>
+              <DatePicker
+                required
+                selected={this.state.datePurchased}
+                onChange={this.handleChangeDatePurchased}
+              />
+            </div>
+          </Form.Group>
+          <Button variant="dark" type="submit">
+            Add House
+          </Button>
+        </Form>
+      </React.Fragment>
     );
   }
 }
