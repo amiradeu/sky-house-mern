@@ -150,7 +150,7 @@ class UpdateHouse extends Component {
           <Form.Label>Location</Form.Label>
           <Form.Control
             required
-            type="number"
+            type="text"
             name="location"
             value={this.state.location}
             onChange={this.handleChangeLocation}

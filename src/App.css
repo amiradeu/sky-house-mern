@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Crimson+Text&display=swap");
 
 body {
   background-color: #dcdcdc;
@@ -6,65 +7,144 @@ body {
 
 #root {
   font-family: "Montserrat", sans-serif;
-  min-width: 320px;
+  min-width: 220px;
 }
 
 .card-deck {
+  margin-top: 30px;
+  margin-bottom: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-row-gap: 50px;
 }
 
+.card,
 .card-header,
 .card-body,
 .card-footer {
   background-color: white;
   color: #0a0a09;
+  border: none;
+}
+
+.card {
+  max-width: 400px;
+  border-radius: 30px;
+  padding: 10px;
 }
 
 .card-header {
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 12px;
+}
+
+.locationCard {
+  flex: 0 1 auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.expandCard {
+  flex: 0 1 auto;
+  margin-left: auto;
+}
+
+.expandCard:hover {
+  color: #c9b3a7;
+  cursor: pointer;
 }
 
 .card-img-top {
-  height: 150px;
-  width: 150px;
+  position: relative;
+  height: 180px;
+  width: 180px;
+}
+
+.card-img-bottom {
+  position: relative;
+  height: 50px;
+  width: 50px;
+  left: 90px;
+  margin-top: -30px;
+}
+
+.card-body {
+  padding-bottom: 0;
 }
 
 .card-title {
-  font-weight: 600;
+  font-weight: 900;
 }
 
 .card-subtitle {
   font-size: 10px;
 }
 
-.card-body {
-  padding: 0.5rem;
+.price {
+  font-size: 28px;
 }
+
 .card-text {
-  font-weight: 300;
-  text-align: left;
+  font-family: "Crimson Text", serif;
+  text-align: justify;
+}
+
+.readmore {
+  color: #0a0a09;
+  font-size: 14px;
+}
+
+.readmore:hover {
+  color: #c9b3a7;
+  text-decoration: none;
 }
 
 .card-footer {
-  border: none;
+  margin-bottom: 10px;
+}
+
+/* .btn-dark {
+  background-color: #0a0a09;
 }
 
 .btn-dark:hover {
   background-color: #c9b3a7;
   color: white;
   border-color: #c9b3a7;
+} */
+
+.tools {
+  position: relative;
+}
+
+.editHouse,
+.deleteHouse {
+  color: white;
+  background-color: #c9b3a7;
+  height: 50px;
+  width: 50px;
+  padding: 12px;
+  top: -15px;
 }
 
 .editHouse {
-  color: #c9b3a7;
-  text-transform: lowercase;
+  right: 90px;
+  position: absolute;
+  /* margin-bottom: -40px; */
 }
 
-.editHouse:hover {
-  color: #0a0a09;
-  text-decoration: none;
+.deleteHouse {
+  right: 10px;
+  position: absolute;
+}
+
+.editHouse:hover,
+.deleteHouse:hover {
+  color: white;
+  background-color: #0a0a09;
+  cursor: pointer;
 }

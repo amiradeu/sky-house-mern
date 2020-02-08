@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import House from "./house-item.component";
+import NewHouse from "./new-house.component";
 
 import { Button, CardDeck } from "react-bootstrap";
 import { MdAddCircle } from "react-icons/md";
@@ -44,10 +45,13 @@ class Houses extends Component {
 
     return (
       <React.Fragment>
-        <Button href="/houses/add/" className="mt-3" variant="dark">
+        {/* <Button href="/houses/add/" className="my-3" variant="dark">
           <MdAddCircle className="mr-1"></MdAddCircle>new house
-        </Button>
-        <CardDeck>{houseList}</CardDeck>
+        </Button> */}
+        <CardDeck>
+          {houseList}
+          <NewHouse></NewHouse>
+        </CardDeck>
       </React.Fragment>
     );
   }
