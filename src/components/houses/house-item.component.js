@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { FiEdit2 } from "react-icons/fi";
 import { IoIosArrowDown, IoMdClose } from "react-icons/io";
 import baththub from "../../assets/images/bathtub.svg";

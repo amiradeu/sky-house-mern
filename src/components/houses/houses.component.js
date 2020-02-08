@@ -3,8 +3,7 @@ import axios from "axios";
 import House from "./house-item.component";
 import NewHouse from "./new-house.component";
 
-import { Button, CardDeck } from "react-bootstrap";
-import { MdAddCircle } from "react-icons/md";
+import { CardDeck } from "react-bootstrap";
 
 class Houses extends Component {
   constructor(props) {

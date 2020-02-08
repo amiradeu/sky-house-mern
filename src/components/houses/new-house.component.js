@@ -1,8 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
-import { MdLocationOn } from "react-icons/md";
-import { FaUserAlt, FaCalendarDay, FaRegEdit } from "react-icons/fa";
-import { MdAddCircle } from "react-icons/md";
+import { Card } from "react-bootstrap";
 import plus from "../../assets/images/plus.png";
 import house from "../../assets/images/house.png";
 
