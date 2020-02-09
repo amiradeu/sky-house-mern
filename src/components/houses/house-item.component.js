@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { FiEdit2 } from "react-icons/fi";
-import { IoIosArrowDown, IoMdClose } from "react-icons/io";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { IoIosArrowDown } from "react-icons/io";
 import baththub from "../../assets/images/bathtub.svg";
 import bed from "../../assets/images/bed.svg";
 
@@ -72,7 +72,7 @@ function House(props) {
               props.deleteHouse(props.house._id);
             }}
           >
-            <IoMdClose size={26}></IoMdClose>
+            <FiTrash2 size={26}></FiTrash2>
           </div>
         </div>
       </Card>
