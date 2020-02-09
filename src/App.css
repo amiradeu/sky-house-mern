@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css?family=Crimson+Text&display=swap");
 
 body {
-  background-color: #dcdcdc;
+  background-color: white;
 }
 
 #root {
@@ -29,8 +29,15 @@ body {
 
 .card {
   max-width: 400px;
-  border-radius: 30px;
+  border-radius: 0px;
   padding: 10px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1px solid #c9b3a7;
+}
+
+.card:hover {
+  cursor: pointer;
+  box-shadow: 0 20px 50px rgba(201, 179, 167, 0.7);
 }
 
 .card-header {
@@ -39,6 +46,13 @@ body {
   position: relative;
   text-transform: uppercase;
   font-weight: 400;
+}
+
+#addnew {
+  text-transform: uppercase;
+  font-weight: 400;
+  text-align: center;
+  padding: 12px 20px;
 }
 
 .locationCard {

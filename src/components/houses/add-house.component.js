@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import { toJson } from "unsplash-js";
 import addOwnerLogo from "../../assets/images/add.png";
+import "./form.css";
 
 const unsplash_api = process.env.REACT_APP_UNSPLASH_API;
 
@@ -151,11 +152,11 @@ class AddHouse extends Component {
     );
     return (
       <React.Fragment>
-        <h1>Add New House</h1>
+        <p>Enter the house detail:</p>
         <Form onSubmit={this.handleSubmit}>
           <Form.Row>
-            <Form.Group as={Col} md="8">
-              <Form.Label>House</Form.Label>
+            <Form.Group as={Col} xs="8">
+              <Form.Label>House Name</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -163,17 +164,10 @@ class AddHouse extends Component {
                 value={this.state.housename}
                 onChange={this.handleChangeHousename}
               />
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                required
-                as="textarea"
-                name="description"
-                value={this.state.description}
-                onChange={this.handleChangeDescription}
-                rows="3"
-              />
+              <Form.Label>Price / night</Form.Label>
+              <Form.Control required type="number" name="price" />
             </Form.Group>
-            <Form.Group as={Col} md="4">
+            <Form.Group as={Col} xs="4">
               <Image
                 src={this.state.imgsrc}
                 className="rounded-circle p-2 apiImg"
@@ -185,10 +179,34 @@ class AddHouse extends Component {
                 placement="bottom"
                 overlay={popover}
               >
-                <Button variant="dark">Choose house</Button>
+                <Button variant="dark" className="">
+                  house image
+                </Button>
               </OverlayTrigger>
             </Form.Group>
           </Form.Row>
+          <Form.Group>
+            <Form.Label>Location</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="location"
+              value={this.state.location}
+              onChange={this.handleChangeLocation}
+            />
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              required
+              as="textarea"
+              name="description"
+              value={this.state.description}
+              onChange={this.handleChangeDescription}
+              rows="3"
+            />
+          </Form.Group>
           <Form.Group>
             <Form.Label>Owner name</Form.Label>
             <Form.Control
@@ -205,18 +223,6 @@ class AddHouse extends Component {
                 );
               })}
             </Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Location</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="location"
-              value={this.state.location}
-              onChange={this.handleChangeLocation}
-            />
-          </Form.Group>
-          <Form.Group>
             <Form.Label>Date Purchased</Form.Label>
             <div>
               <DatePicker
@@ -226,6 +232,7 @@ class AddHouse extends Component {
               />
             </div>
           </Form.Group>
+
           <Button variant="dark" type="submit">
             Add House
           </Button>

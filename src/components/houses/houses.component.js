@@ -44,9 +44,6 @@ class Houses extends Component {
 
     return (
       <React.Fragment>
-        {/* <Button href="/houses/add/" className="my-3" variant="dark">
-          <MdAddCircle className="mr-1"></MdAddCircle>new house
-        </Button> */}
         <CardDeck>
           {houseList}
           <NewHouse></NewHouse>

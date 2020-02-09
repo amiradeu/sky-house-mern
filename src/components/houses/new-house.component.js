@@ -1,28 +1,31 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import plus from "../../assets/images/plus.png";
+import user from "../../assets/images/user.png";
 import house from "../../assets/images/house.png";
 
 const NewHouse = () => {
   return (
-    <Card>
-      <Card.Header as="h5">Add House</Card.Header>
-      <Card.Img
-        variant="top"
-        src={plus}
-        alt="house"
-        className="rounded-circle m-2 mx-auto d-block"
-      />
-
-      <Card.Body className="rounded-0">
+    <React.Fragment>
+      <Card
+        onClick={() => {
+          window.location = "/houses/add/";
+        }}
+      >
+        <div id="addnew">Add house</div>
         <Card.Img
           variant="top"
           src={house}
           alt="house"
-          className="m-2 mx-auto d-block"
+          className="rounded-circle mx-auto d-block"
         />
-      </Card.Body>
-    </Card>
+        <Card.Img
+          variant="bottom"
+          src={user}
+          alt="owner"
+          className="rounded-circle mx-auto d-block"
+        />
+      </Card>
+    </React.Fragment>
   );
 };
 

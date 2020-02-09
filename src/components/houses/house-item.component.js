@@ -7,17 +7,9 @@ import bed from "../../assets/images/bed.svg";
 
 function House(props) {
   let cardText = props.house.description;
-  const more = (
-    <a href="#" className="readmore">
-      (read more)
-    </a>
-  );
+
   if (cardText.length > 100)
-    cardText = (
-      <React.Fragment>
-        {cardText.slice(0, 100)}...{more}
-      </React.Fragment>
-    );
+    cardText = <React.Fragment>{cardText.slice(0, 100)}...</React.Fragment>;
   else if (cardText.length < 10)
     cardText = <React.Fragment>{cardText}</React.Fragment>;
 
@@ -50,12 +42,15 @@ function House(props) {
           <Card.Text className="mt-2">{cardText}</Card.Text>
         </Card.Body>
         <Card.Footer className="mx-auto d-block">
-          <span>
-            3<img src={bed} height="30px" width="30px"></img>
-          </span>
-          <span>
-            2<img src={baththub} height="30px" width="30px"></img>
-          </span>
+          <h3>
+            3<img src={bed} height="30px" width="30px" className="mx-2"></img>2
+            <img
+              src={baththub}
+              height="30px"
+              width="30px"
+              className="mx-2 mt-n2"
+            ></img>
+          </h3>
         </Card.Footer>
         <div className="tools">
           <div

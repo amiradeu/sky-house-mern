@@ -1,0 +1,9 @@
+label {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+form {
+  padding: 10px;
+}
