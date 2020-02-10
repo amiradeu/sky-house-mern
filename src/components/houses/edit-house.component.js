@@ -12,7 +12,7 @@ class UpdateHouse extends Component {
       housename: "",
       description: "",
       ownername: "",
-      location: 0,
+      location: "",
       datePurchased: new Date(),
       owners: [] //list of owners to choose to associate to a house
     };
@@ -29,6 +29,7 @@ class UpdateHouse extends Component {
     axios
       .get("http://localhost:5000/houses/" + this.props.match.params.id)
       .then(res => {
+        console.log(res.data.ownername);
         this.setState({
           housename: res.data.housename,
           description: res.data.description,
@@ -43,9 +44,9 @@ class UpdateHouse extends Component {
 
     axios.get("http://localhost:5000/owners/").then(res => {
       if (res.data.length > 0) {
+        console.log(res.data);
         this.setState({
-          owners: res.data.map(owner => owner.ownername),
-          ownername: res.data[0].ownername
+          owners: res.data.map(owner => owner.ownername)
         });
       }
     });
@@ -108,6 +109,8 @@ class UpdateHouse extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <h1>Edit House</h1>
+        {this.state.description}
+        {this.state.ownername}
         <Form.Group>
           <Form.Label>House</Form.Label>
           <Form.Control

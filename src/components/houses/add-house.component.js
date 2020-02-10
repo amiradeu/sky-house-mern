@@ -24,7 +24,7 @@ class AddHouse extends Component {
       housename: "",
       description: "",
       ownername: "",
-      location: 0,
+      location: "",
       datePurchased: new Date(),
       imgsrc: addOwnerLogo,
       imglist: [],

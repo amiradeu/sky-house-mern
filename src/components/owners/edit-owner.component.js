@@ -55,7 +55,8 @@ class EditOwner extends Component {
       .get("http://localhost:5000/owners/" + this.props.match.params.id)
       .then(res => {
         this.setState({
-          ownername: res.data.ownername
+          ownername: res.data.ownername,
+          imgsrc: res.data.imgsrc
         });
       })
       .catch(err => {
@@ -76,7 +77,10 @@ class EditOwner extends Component {
     };
 
     axios
-      .post("http://localhost:5000/owners/edit" + this.props.match.params.id)
+      .post(
+        "http://localhost:5000/owners/edit/" + this.props.match.params.id,
+        owner
+      )
       .then(res => console.log(res.data));
 
     window.location = "/owners/";
@@ -114,7 +118,7 @@ class EditOwner extends Component {
 
     return (
       <React.Fragment>
-        <h1>Create New Owner</h1>
+        <h1>Edit Owner</h1>
         <Form onSubmit={this.handleSubmit}>
           <Form.Row>
             <Form.Group as={Col} md="8">
