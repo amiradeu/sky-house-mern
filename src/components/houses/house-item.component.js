@@ -54,7 +54,7 @@ function House(props) {
         </Card.Footer>
         <div className="tools">
           <div
-            className="rounded-circle editHouse "
+            className="rounded-circle edit "
             onClick={() => {
               window.location = "/houses/edit/" + props.house._id;
             }}
@@ -62,7 +62,7 @@ function House(props) {
             <FiEdit2 size={26}></FiEdit2>
           </div>
           <div
-            className="rounded-circle deleteHouse"
+            className="rounded-circle trash"
             onClick={() => {
               props.deleteHouse(props.house._id);
             }}

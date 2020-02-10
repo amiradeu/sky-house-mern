@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import Owner from "./owner-item.component";
+import NewOwner from "./new-owner.component";
 
-import { Button, CardDeck } from "react-bootstrap";
-import { MdAddCircle } from "react-icons/md";
+import { CardDeck } from "react-bootstrap";
 
 class Owners extends Component {
   constructor(props) {
@@ -39,10 +39,10 @@ class Owners extends Component {
 
     return (
       <React.Fragment>
-        <Button href="/owners/add/" className="mt-3" variant="dark">
-          <MdAddCircle className="mr-1"></MdAddCircle>new owner
-        </Button>
-        <CardDeck>{ownerList}</CardDeck>
+        <CardDeck>
+          {ownerList}
+          <NewOwner></NewOwner>
+        </CardDeck>
       </React.Fragment>
     );
   }

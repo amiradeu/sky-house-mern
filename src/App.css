@@ -121,7 +121,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* .btn-dark {
+.btn-dark {
   background-color: #0a0a09;
 }
 
@@ -129,36 +129,42 @@ body {
   background-color: #c9b3a7;
   color: white;
   border-color: #c9b3a7;
-} */
+}
 
 .tools {
   position: relative;
 }
 
-.editHouse,
-.deleteHouse {
-  color: white;
-  background-color: #c9b3a7;
+.edit,
+.trash {
+  border: 1px solid #c9b3a7;
   height: 50px;
   width: 50px;
   padding: 12px;
   top: -15px;
 }
 
-.editHouse {
+.edit {
+  color: #c9b3a7;
+  background-color: white;
   right: 90px;
   position: absolute;
-  /* margin-bottom: -40px; */
 }
 
-.deleteHouse {
+.trash {
+  color: white;
+  background-color: #c9b3a7;
   right: 10px;
   position: absolute;
 }
 
-.editHouse:hover,
-.deleteHouse:hover {
+.trash:hover {
   color: white;
   background-color: #0a0a09;
-  cursor: pointer;
+  border-color: #0a0a09;
+}
+
+.edit:hover {
+  color: #0a0a09;
+  border-color: #0a0a09;
 }

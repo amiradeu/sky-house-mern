@@ -2,50 +2,48 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 import { MdLocationOn } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
 function OwnerItem(props) {
   return (
-    <Card className="m-3">
-      <Card.Header as="h5" className="rounded-0">
-        <MdLocationOn className="mr-1" size={16}></MdLocationOn>
-        location
-      </Card.Header>
-      <Card.Img
-        variant="top"
-        className="rounded-circle p-1 mx-auto d-block"
-        src={props.owner.imgsrc}
-        alt="owner"
-      ></Card.Img>
-      <Card.Body>
-        <Card.Title className="text-center text-capitalize">
-          {props.owner.ownername}
-        </Card.Title>
-        <Card.Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-          ad distinctio dicta, quas neque, nisi beatae quisquam eveniet
-          laboriosam unde aliquam
-        </Card.Text>
-      </Card.Body>
-      <Card.Footer className="rounded-0">
-        <div className="float-right">
-          <a
-            className="mx-3 editHouse"
-            href={"/owners/edit/" + props.owner._id}
+    <React.Fragment>
+      <Card>
+        <Card.Img
+          variant="top"
+          className="rounded-circle p-1 mx-auto d-block"
+          src={props.owner.imgsrc}
+          alt="owner"
+        ></Card.Img>
+        <Card.Body className="mb-4">
+          <Card.Title className="text-center text-capitalize">
+            {props.owner.ownername}
+          </Card.Title>
+          <Card.Text>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur
+            ad distinctio dicta, quas neque, nisi beatae quisquam eveniet
+            laboriosam unde aliquam
+          </Card.Text>
+        </Card.Body>
+        <div className="tools">
+          <div
+            className="rounded-circle edit "
+            onClick={() => {
+              window.location = "/owners/edit/" + props.owner._id;
+            }}
           >
-            <FaRegEdit className="mr-1"></FaRegEdit>
-            Edit
-          </a>
-          <Button
-            variant="dark"
+            <FiEdit2 size={26}></FiEdit2>
+          </div>
+          <div
+            className="rounded-circle trash"
             onClick={() => {
               props.deleteOwner(props.owner._id);
             }}
           >
-            Delete
-          </Button>
+            <FiTrash2 size={26}></FiTrash2>
+          </div>
         </div>
-      </Card.Footer>
-    </Card>
+      </Card>
+    </React.Fragment>
   );
 }
 
