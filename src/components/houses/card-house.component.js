@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import user from "../../assets/images/user.png";
 import house from "../../assets/images/house.png";
 
-const NewHouse = () => {
+const CardHouse = () => {
   return (
     <React.Fragment>
       <Card
@@ -29,4 +29,4 @@ const NewHouse = () => {
   );
 };
 
-export default NewHouse;
+export default CardHouse;

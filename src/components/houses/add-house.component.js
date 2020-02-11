@@ -1,18 +1,12 @@
 import React, { Component } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
-import {
-  Form,
-  Button,
-  Col,
-  Image,
-  OverlayTrigger,
-  Popover
-} from "react-bootstrap";
-import addOwnerLogo from "../../assets/images/add.png";
-import "./form.css";
+import { Col, Image, Popover } from "react-bootstrap";
 import { getHouseUnsplash } from "../../api/unsplash.api";
+import axios from "axios";
+
+import FormHouse from "./form-house.component";
+import addOwnerLogo from "../../assets/images/add.png";
+import "react-datepicker/dist/react-datepicker.css";
+import "./form.css";
 
 class AddHouse extends Component {
   constructor(props) {
@@ -105,6 +99,7 @@ class AddHouse extends Component {
   }
 
   render() {
+    const buttonText = "Add House";
     let imagelist = this.state.imglist.map(src => {
       return src;
     });
@@ -124,7 +119,7 @@ class AddHouse extends Component {
                   />
                   <Image
                     src={src.urls.regular}
-                    className="rounded-circle p-2 apiImg"
+                    className="rounded-circle p-2 popoverImg"
                   ></Image>
                 </label>
               </React.Fragment>
@@ -135,91 +130,18 @@ class AddHouse extends Component {
     );
     return (
       <React.Fragment>
-        <p>Enter the house detail:</p>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Row>
-            <Form.Group as={Col} xs="8">
-              <Form.Label>House Name</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="housename"
-                value={this.state.housename}
-                onChange={this.handleChangeHousename}
-              />
-              <Form.Label>Price / night</Form.Label>
-              <Form.Control required type="number" name="price" />
-            </Form.Group>
-            <Form.Group as={Col} xs="4">
-              <Image
-                src={this.state.imgsrc}
-                className="rounded-circle p-2 apiImg"
-              ></Image>
-              <br />
-              <OverlayTrigger
-                trigger="click"
-                key="bottom"
-                placement="bottom"
-                overlay={popover}
-              >
-                <Button variant="dark" className="">
-                  house image
-                </Button>
-              </OverlayTrigger>
-            </Form.Group>
-          </Form.Row>
-          <Form.Group>
-            <Form.Label>Location</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="location"
-              value={this.state.location}
-              onChange={this.handleChangeLocation}
-            />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              required
-              as="textarea"
-              name="description"
-              value={this.state.description}
-              onChange={this.handleChangeDescription}
-              rows="3"
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Owner name</Form.Label>
-            <Form.Control
-              as="select"
-              name="ownername"
-              value={this.state.ownername}
-              onChange={this.handleChangeOwnername}
-            >
-              {this.state.owners.map(owner => {
-                return (
-                  <option key={owner} value={owner}>
-                    {owner}
-                  </option>
-                );
-              })}
-            </Form.Control>
-            <Form.Label>Date Purchased</Form.Label>
-            <div>
-              <DatePicker
-                required
-                selected={this.state.datePurchased}
-                onChange={this.handleChangeDatePurchased}
-              />
-            </div>
-          </Form.Group>
-
-          <Button variant="dark" type="submit">
-            Add House
-          </Button>
-        </Form>
+        <FormHouse
+          state={this.state}
+          popover={popover}
+          handleChangeHousename={this.handleChangeHousename}
+          handleChangeDescription={this.handleChangeDescription}
+          handleChangeOwnername={this.handleChangeOwnername}
+          handleChangeLocation={this.handleChangeLocation}
+          handleChangeDatePurchased={this.handleChangeDatePurchased}
+          handleChangeImage={this.handleChangeImage}
+          handleSubmit={this.handleSubmit}
+          buttonText={buttonText}
+        ></FormHouse>
       </React.Fragment>
     );
   }

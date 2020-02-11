@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
-import {
-  Form,
-  Button,
-  OverlayTrigger,
-  Popover,
-  Col,
-  Image
-} from "react-bootstrap";
+import { Popover, Col, Image } from "react-bootstrap";
 import "../models.css";
 import addOwnerLogo from "../../assets/images/add.png";
 import { getPeopleUnsplash } from "../../api/unsplash.api";
+import FormOwner from "./form-owner.component";
 
 class CreateOwner extends Component {
   constructor(props) {
@@ -57,6 +51,8 @@ class CreateOwner extends Component {
   }
 
   render() {
+    const buttonText = "Add Owner";
+
     let imagelist = this.state.imglist.map(src => {
       return src;
     });
@@ -76,7 +72,7 @@ class CreateOwner extends Component {
                   />
                   <Image
                     src={src.urls.regular}
-                    className="rounded-circle p-2 apiImg"
+                    className="rounded-circle p-2 popoverImg"
                   ></Image>
                 </label>
               </React.Fragment>
@@ -89,49 +85,14 @@ class CreateOwner extends Component {
     return (
       <React.Fragment>
         <h1>Create New Owner</h1>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Row>
-            <Form.Group as={Col} md="8">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="ownername"
-                value={this.state.ownername}
-                onChange={this.handleChangeOwnername}
-                placeholder="Enter first name"
-              />
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                // required
-                type="text"
-                disabled
-                // name="ownername"
-                // value={this.state.ownername}
-                // onChange={this.handleChangeOwnername}
-                placeholder="Enter last name"
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="4">
-              <Image
-                src={this.state.imgsrc}
-                className="rounded-circle p-2 apiImg"
-              ></Image>
-              <br />
-              <OverlayTrigger
-                trigger="click"
-                key="bottom"
-                placement="bottom"
-                overlay={popover}
-              >
-                <Button variant="dark">Choose avatar</Button>
-              </OverlayTrigger>
-            </Form.Group>
-          </Form.Row>
-          <Button variant="dark" type="submit">
-            Create Owner
-          </Button>
-        </Form>
+        <FormOwner
+          state={this.state}
+          popover={popover}
+          handleChangeOwnername={this.handleChangeOwnername}
+          handleChangeImage={this.handleChangeImage}
+          handleSubmit={this.handleSubmit}
+          buttonText={buttonText}
+        ></FormOwner>
       </React.Fragment>
     );
   }

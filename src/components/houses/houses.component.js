@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
-import House from "./house-item.component";
-import NewHouse from "./new-house.component";
-
 import { CardDeck } from "react-bootstrap";
+import axios from "axios";
+
+import House from "./item-house.component";
+import CardHouse from "./card-house.component";
 
 class Houses extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class Houses extends Component {
       <React.Fragment>
         <CardDeck>
           {houseList}
-          <NewHouse></NewHouse>
+          <CardHouse></CardHouse>
         </CardDeck>
       </React.Fragment>
     );

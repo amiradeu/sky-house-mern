@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import Owner from "./owner-item.component";
-import NewOwner from "./new-owner.component";
+import Owner from "./item-owner.component";
+import CardOwner from "./card-owner.component";
 
 import { CardDeck } from "react-bootstrap";
 
@@ -40,7 +40,7 @@ class Owners extends Component {
       <React.Fragment>
         <CardDeck>
           {ownerList}
-          <NewOwner></NewOwner>
+          <CardOwner></CardOwner>
         </CardDeck>
       </React.Fragment>
     );

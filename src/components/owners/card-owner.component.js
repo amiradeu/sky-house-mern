@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import user from "../../assets/images/user.png";
 import house from "../../assets/images/house.png";
 
-const NewOwner = () => {
+const CardOwner = () => {
   return (
     <React.Fragment>
       <Card
@@ -29,4 +29,4 @@ const NewOwner = () => {
   );
 };
 
-export default NewOwner;
+export default CardOwner;

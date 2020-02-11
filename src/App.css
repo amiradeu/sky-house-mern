@@ -121,17 +121,6 @@ body {
   margin-bottom: 10px;
 }
 
-.btn-dark {
-  background-color: #df8167;
-  border-color: #df8167;
-}
-
-.btn-dark:hover {
-  background-color: #debccc;
-  color: white;
-  border-color: #debccc;
-}
-
 .tools {
   position: relative;
 }

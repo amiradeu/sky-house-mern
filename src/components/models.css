@@ -18,8 +18,10 @@
   border: 2px solid #0a0a09;
 }
 
-.apiImg:hover {
-  border: 2px solid #c9b3a7;
+.apiImg:hover,
+.popoverImg:hover {
+  border: 2px solid #debccc;
+  cursor: pointer;
 }
 
 .popover-body {
@@ -28,13 +30,18 @@
 }
 
 .apiImg {
+  height: 180px;
+  width: 180px;
+}
+
+.popoverImg {
   height: 100px;
   width: 100px;
 }
 
 @media (max-width: 500px) {
   .apiImg {
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
   }
 }
