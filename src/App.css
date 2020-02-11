@@ -122,13 +122,14 @@ body {
 }
 
 .btn-dark {
-  background-color: #14050c;
+  background-color: #df8167;
+  border-color: #df8167;
 }
 
 .btn-dark:hover {
-  background-color: #c9b3a7;
+  background-color: #debccc;
   color: white;
-  border-color: #c9b3a7;
+  border-color: #debccc;
 }
 
 .tools {

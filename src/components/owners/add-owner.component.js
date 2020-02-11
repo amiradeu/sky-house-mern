@@ -8,11 +8,9 @@ import {
   Col,
   Image
 } from "react-bootstrap";
-import { toJson } from "unsplash-js";
 import "../models.css";
 import addOwnerLogo from "../../assets/images/add.png";
-
-const unsplash_api = process.env.REACT_APP_UNSPLASH_API;
+import { getPeopleUnsplash } from "../../api/unsplash.api";
 
 class CreateOwner extends Component {
   constructor(props) {
@@ -29,20 +27,6 @@ class CreateOwner extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  onCreateOwner = async () => {
-    const Unsplash = require("unsplash-js").default;
-    const unsplash = new Unsplash({
-      accessKey: unsplash_api
-    });
-
-    await unsplash.search
-      .photos("headshot people", 3, 100)
-      .then(toJson)
-      .then(json => {
-        this.setState({ imglist: json.results });
-      });
-  };
-
   handleChangeOwnername(e) {
     this.setState({
       ownername: e.target.value
@@ -50,7 +34,7 @@ class CreateOwner extends Component {
   }
 
   componentDidMount() {
-    this.onCreateOwner();
+    getPeopleUnsplash().then(res => this.setState({ imglist: res }));
   }
 
   handleChangeImage(e) {

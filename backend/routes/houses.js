@@ -55,7 +55,7 @@ router.route("/edit/:id").post((req, res) => {
       house.description = req.body.description;
       house.location = req.body.location;
       house.datePurchased = Date.parse(req.body.datePurchased);
-      imgsrc = req.body.imgsrc;
+      house.imgsrc = req.body.imgsrc;
 
       house
         .save()

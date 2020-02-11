@@ -10,10 +10,8 @@ import {
   OverlayTrigger,
   Popover
 } from "react-bootstrap";
-import { toJson } from "unsplash-js";
 import "../models.css";
-
-const unsplash_api = process.env.REACT_APP_UNSPLASH_API;
+import { getHouseUnsplash } from "../../api/unsplash.api";
 
 class EditHouse extends Component {
   constructor(props) {
@@ -38,20 +36,6 @@ class EditHouse extends Component {
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  onCreateHouse = async () => {
-    const Unsplash = require("unsplash-js").default;
-    const unsplash = new Unsplash({
-      accessKey: unsplash_api
-    });
-
-    await unsplash.search
-      .photos("house", 3, 100)
-      .then(toJson)
-      .then(json => {
-        this.setState({ imglist: json.results });
-      });
-  };
 
   handleChangeHousename(e) {
     this.setState({
@@ -88,7 +72,7 @@ class EditHouse extends Component {
   }
 
   componentDidMount() {
-    this.onCreateHouse();
+    getHouseUnsplash().then(res => this.setState({ imglist: res }));
     axios
       .get("http://localhost:5000/houses/" + this.props.match.params.id)
       .then(res => {
@@ -125,7 +109,6 @@ class EditHouse extends Component {
       datePurchased: this.state.datePurchased,
       imgsrc: this.state.imgsrc
     };
-
     axios
       .post(
         "http://localhost:5000/houses/edit/" + this.props.match.params.id,
@@ -168,7 +151,6 @@ class EditHouse extends Component {
     return (
       <React.Fragment>
         <p>Enter the house detail:</p>
-        {this.state.imgsrc}
         <Form onSubmit={this.handleSubmit}>
           <Form.Row>
             <Form.Group as={Col} xs="8">

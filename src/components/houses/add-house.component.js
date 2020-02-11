@@ -10,11 +10,9 @@ import {
   OverlayTrigger,
   Popover
 } from "react-bootstrap";
-import { toJson } from "unsplash-js";
 import addOwnerLogo from "../../assets/images/add.png";
 import "./form.css";
-
-const unsplash_api = process.env.REACT_APP_UNSPLASH_API;
+import { getHouseUnsplash } from "../../api/unsplash.api";
 
 class AddHouse extends Component {
   constructor(props) {
@@ -41,7 +39,7 @@ class AddHouse extends Component {
   }
 
   componentDidMount() {
-    this.onCreateHouse();
+    getHouseUnsplash().then(res => this.setState({ imglist: res }));
 
     axios.get("http://localhost:5000/owners/").then(res => {
       if (res.data.length > 0) {
@@ -52,20 +50,6 @@ class AddHouse extends Component {
       }
     });
   }
-
-  onCreateHouse = async () => {
-    const Unsplash = require("unsplash-js").default;
-    const unsplash = new Unsplash({
-      accessKey: unsplash_api
-    });
-
-    await unsplash.search
-      .photos("house", 3, 100)
-      .then(toJson)
-      .then(json => {
-        this.setState({ imglist: json.results });
-      });
-  };
 
   handleChangeHousename(e) {
     this.setState({
