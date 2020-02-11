@@ -5,23 +5,23 @@ import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
-import Navbar from "./components/navbar.component";
+import Navbar from "./components/navbar/navbar.component";
 import Houses from "./components/houses/houses.component";
 import AddHouse from "./components/houses/add-house.component";
 import EditHouse from "./components/houses/edit-house.component";
 import Owners from "./components/owners/owners.component";
 import AddOwner from "./components/owners/add-owner.component";
 import EditOwner from "./components/owners/edit-owner.component";
-import About from "./components/about.component";
-import Map from "./components/map.component";
+import About from "./components/about/about.component";
+import Map from "./components/map/map.component";
 
 function App() {
   return (
     <Router>
       <React.Fragment>
         <Navbar />
+        <Route path="/" exact component={Map} />
         <Container fluid>
-          <Route path="/" exact component={Map} />
           <Route path="/houses/" exact component={Houses} />
           <Route path="/houses/add" exact component={AddHouse} />
           <Route path="/houses/edit/:id" component={EditHouse} />

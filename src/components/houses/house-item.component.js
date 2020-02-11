@@ -43,9 +43,18 @@ function House(props) {
         </Card.Body>
         <Card.Footer className="mx-auto d-block">
           <h3>
-            3<img src={bed} height="30px" width="30px" className="mx-2"></img>2
+            3
+            <img
+              src={bed}
+              alt="bed"
+              height="30px"
+              width="30px"
+              className="mx-2"
+            ></img>
+            2
             <img
               src={baththub}
+              alt="bath"
               height="30px"
               width="30px"
               className="mx-2 mt-n2"

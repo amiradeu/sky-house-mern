@@ -2,9 +2,20 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Col,
+  Image,
+  OverlayTrigger,
+  Popover
+} from "react-bootstrap";
+import { toJson } from "unsplash-js";
+import "../models.css";
 
-class UpdateHouse extends Component {
+const unsplash_api = process.env.REACT_APP_UNSPLASH_API;
+
+class EditHouse extends Component {
   constructor(props) {
     super(props);
 
@@ -14,6 +25,8 @@ class UpdateHouse extends Component {
       ownername: "",
       location: "",
       datePurchased: new Date(),
+      imgsrc: "",
+      imglist: [],
       owners: [] //list of owners to choose to associate to a house
     };
 
@@ -22,35 +35,23 @@ class UpdateHouse extends Component {
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeDatePurchased = this.handleChangeDatePurchased.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:5000/houses/" + this.props.match.params.id)
-      .then(res => {
-        console.log(res.data.ownername);
-        this.setState({
-          housename: res.data.housename,
-          description: res.data.description,
-          ownername: res.data.ownername,
-          location: res.data.location,
-          datePurchased: new Date(res.data.datePurchased)
-        });
-      })
-      .catch(err => {
-        console.log(`Error: ${err}`);
-      });
-
-    axios.get("http://localhost:5000/owners/").then(res => {
-      if (res.data.length > 0) {
-        console.log(res.data);
-        this.setState({
-          owners: res.data.map(owner => owner.ownername)
-        });
-      }
+  onCreateHouse = async () => {
+    const Unsplash = require("unsplash-js").default;
+    const unsplash = new Unsplash({
+      accessKey: unsplash_api
     });
-  }
+
+    await unsplash.search
+      .photos("house", 3, 100)
+      .then(toJson)
+      .then(json => {
+        this.setState({ imglist: json.results });
+      });
+  };
 
   handleChangeHousename(e) {
     this.setState({
@@ -82,6 +83,37 @@ class UpdateHouse extends Component {
     });
   }
 
+  handleChangeImage(e) {
+    this.setState({ imgsrc: e.target.value });
+  }
+
+  componentDidMount() {
+    this.onCreateHouse();
+    axios
+      .get("http://localhost:5000/houses/" + this.props.match.params.id)
+      .then(res => {
+        this.setState({
+          housename: res.data.housename,
+          description: res.data.description,
+          ownername: res.data.ownername,
+          location: res.data.location,
+          datePurchased: new Date(res.data.datePurchased),
+          imgsrc: res.data.imgsrc
+        });
+      })
+      .catch(err => {
+        console.log(`Error: ${err}`);
+      });
+
+    axios.get("http://localhost:5000/owners/").then(res => {
+      if (res.data.length > 0) {
+        this.setState({
+          owners: res.data.map(owner => owner.ownername)
+        });
+      }
+    });
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
@@ -90,10 +122,9 @@ class UpdateHouse extends Component {
       description: this.state.description,
       ownername: this.state.ownername,
       location: this.state.location,
-      datePurchased: this.state.datePurchased
+      datePurchased: this.state.datePurchased,
+      imgsrc: this.state.imgsrc
     };
-
-    console.log(house);
 
     axios
       .post(
@@ -106,75 +137,124 @@ class UpdateHouse extends Component {
   }
 
   render() {
+    let imagelist = this.state.imglist.map(src => {
+      return src;
+    });
+    const popover = (
+      <Popover id="popover-positioned-bottom">
+        <Popover.Title as="h3">Choose image</Popover.Title>
+        <Popover.Content>
+          <Col>
+            {imagelist.map(src => (
+              <React.Fragment key={src.id}>
+                <label>
+                  <input
+                    type="radio"
+                    name="img"
+                    value={src.urls.regular}
+                    onChange={this.handleChangeImage}
+                  />
+                  <Image
+                    src={src.urls.regular}
+                    className="rounded-circle p-2 apiImg"
+                  ></Image>
+                </label>
+              </React.Fragment>
+            ))}
+          </Col>
+        </Popover.Content>
+      </Popover>
+    );
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <h1>Edit House</h1>
-        {this.state.description}
-        {this.state.ownername}
-        <Form.Group>
-          <Form.Label>House</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="housename"
-            value={this.state.housename}
-            onChange={this.handleChangeHousename}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            required
-            as="textarea"
-            name="description"
-            value={this.state.description}
-            onChange={this.handleChangeDescription}
-            rows="3"
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Owner name</Form.Label>
-          <Form.Control
-            as="select"
-            name="ownername"
-            value={this.state.ownername}
-            onChange={this.handleChangeOwnername}
-          >
-            {this.state.owners.map(owner => {
-              return (
-                <option key={owner} value={owner}>
-                  {owner}
-                </option>
-              );
-            })}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Location</Form.Label>
-          <Form.Control
-            required
-            type="text"
-            name="location"
-            value={this.state.location}
-            onChange={this.handleChangeLocation}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Date Purchased</Form.Label>
-          <div>
-            <DatePicker
+      <React.Fragment>
+        <p>Enter the house detail:</p>
+        {this.state.imgsrc}
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Row>
+            <Form.Group as={Col} xs="8">
+              <Form.Label>House Name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="housename"
+                value={this.state.housename}
+                onChange={this.handleChangeHousename}
+              />
+              <Form.Label>Price / night</Form.Label>
+              <Form.Control type="number" name="price" />
+            </Form.Group>
+            <Form.Group as={Col} xs="4">
+              <Image
+                src={this.state.imgsrc}
+                alt="house"
+                className="rounded-circle p-2 apiImg"
+              ></Image>
+              <br />
+              <OverlayTrigger
+                trigger="click"
+                key="bottom"
+                placement="bottom"
+                overlay={popover}
+              >
+                <Button variant="dark">house image</Button>
+              </OverlayTrigger>
+            </Form.Group>
+          </Form.Row>
+          <Form.Group>
+            <Form.Label>Location</Form.Label>
+            <Form.Control
               required
-              selected={this.state.datePurchased}
-              onChange={this.handleChangeDatePurchased}
+              type="text"
+              name="location"
+              value={this.state.location}
+              onChange={this.handleChangeLocation}
             />
-          </div>
-        </Form.Group>
-        <Button variant="dark" type="submit">
-          Save Changes
-        </Button>
-      </Form>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              required
+              as="textarea"
+              name="description"
+              value={this.state.description}
+              onChange={this.handleChangeDescription}
+              rows="3"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Owner name</Form.Label>
+            <Form.Control
+              as="select"
+              name="ownername"
+              value={this.state.ownername}
+              onChange={this.handleChangeOwnername}
+            >
+              {this.state.owners.map(owner => {
+                return (
+                  <option key={owner} value={owner}>
+                    {owner}
+                  </option>
+                );
+              })}
+            </Form.Control>
+            <Form.Label>Date Purchased</Form.Label>
+            <div>
+              <DatePicker
+                required
+                selected={this.state.datePurchased}
+                onChange={this.handleChangeDatePurchased}
+              />
+            </div>
+          </Form.Group>
+
+          <Button variant="dark" type="submit">
+            Save Changes
+          </Button>
+        </Form>
+      </React.Fragment>
     );
   }
 }
 
-export default UpdateHouse;
+export default EditHouse;

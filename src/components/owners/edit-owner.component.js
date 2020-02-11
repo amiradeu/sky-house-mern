@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 import { toJson } from "unsplash-js";
 import "../models.css";
-import addOwnerLogo from "../../assets/images/add.png";
 
 const unsplash_api = process.env.REACT_APP_UNSPLASH_API;
 
@@ -20,7 +19,7 @@ class EditOwner extends Component {
 
     this.state = {
       ownername: "",
-      imgsrc: addOwnerLogo,
+      imgsrc: "",
       imglist: []
     };
 
@@ -49,6 +48,10 @@ class EditOwner extends Component {
     });
   }
 
+  handleChangeImage(e) {
+    this.setState({ imgsrc: e.target.value });
+  }
+
   componentDidMount() {
     this.onCreateOwner();
     axios
@@ -62,10 +65,6 @@ class EditOwner extends Component {
       .catch(err => {
         console.log(`Error: ${err}`);
       });
-  }
-
-  handleChangeImage(e) {
-    this.setState({ imgsrc: e.target.value });
   }
 
   handleSubmit(e) {
@@ -133,12 +132,8 @@ class EditOwner extends Component {
               />
               <Form.Label>Last Name</Form.Label>
               <Form.Control
-                // required
                 type="text"
                 disabled
-                // name="ownername"
-                // value={this.state.ownername}
-                // onChange={this.handleChangeOwnername}
                 placeholder="Enter last name"
               />
             </Form.Group>

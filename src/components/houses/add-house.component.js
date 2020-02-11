@@ -38,7 +38,6 @@ class AddHouse extends Component {
     this.handleChangeDatePurchased = this.handleChangeDatePurchased.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.onCreateHouse = this.onCreateHouse.bind(this);
   }
 
   componentDidMount() {

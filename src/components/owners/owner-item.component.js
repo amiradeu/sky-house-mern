@@ -1,7 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
-import { MdLocationOn } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
+import { Card } from "react-bootstrap";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 
 function OwnerItem(props) {

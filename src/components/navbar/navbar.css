@@ -1,5 +1,5 @@
 .navbar-dark {
-  background-color: #c9b3a7 !important;
+  background-color: #5c9fe0 !important;
 }
 
 .navbar-brand {
@@ -16,7 +16,7 @@
 }
 
 .nav-link:hover {
-  color: #0a0a09 !important;
+  color: #debccc !important;
 }
 
 .navbar-dark .collapsed .navbar-toggler-icon {
@@ -45,3 +45,15 @@
 /* dcdcdc */
 /* 453d3a */
 /* c9b3a7 */
+
+/* pink   - debccc */
+/* blue   - 1d5bb9 */
+/* black  - 14050c */
+/* light purple - b4abc9 */
+/* light blue - 6a8bc3 */
+/* deep orange - 85412f */
+/* deep blue - 2f3b5e */
+
+/* pink - f1e0e8 */
+/* blue - 5c9fe0 */
+/* orange - df8167 */
