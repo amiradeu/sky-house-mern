@@ -17,6 +17,7 @@ const FormHouse = props => {
                 name="housename"
                 value={props.state.housename}
                 onChange={props.handleChangeHousename}
+                autocomplete="off"
               />
             </Form.Group>
             <Form.Group>
@@ -54,6 +55,7 @@ const FormHouse = props => {
                 value={props.state.location}
                 onChange={props.handleChangeLocation}
                 placeholder="Country"
+                autocomplete="off"
               />
             </Col>
             <Col>
@@ -64,6 +66,7 @@ const FormHouse = props => {
                 // value={props.state.location}
                 // onChange={props.handleChangeLocation}
                 placeholder="State"
+                autocomplete="off"
               />
             </Col>
           </Form.Row>

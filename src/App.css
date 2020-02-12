@@ -14,7 +14,7 @@ body {
   margin-top: 30px;
   margin-bottom: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-row-gap: 50px;
 }
 
@@ -46,6 +46,7 @@ body {
   position: relative;
   text-transform: uppercase;
   font-weight: 400;
+  padding-bottom: 20px;
 }
 
 #addnew {
@@ -56,6 +57,7 @@ body {
 }
 
 .locationCard {
+  text-align: center;
   flex: 0 1 auto;
   position: absolute;
   left: 50%;
