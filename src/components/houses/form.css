@@ -1,3 +1,4 @@
+/* form container */
 form {
   border: 1px solid #debccc;
   border-radius: 10px;
@@ -12,17 +13,26 @@ label {
   color: #5c9fe0;
 }
 
-input,
+/* inputs */
+.formInput,
 textarea,
 select {
-  border-radius: 10px;
+  border-radius: 10px !important;
   padding: 20px !important;
   border: 1px solid #debccc !important;
   font-family: "Crimson Text", serif;
   font-size: 0.95rem !important;
 }
 
-input:focus,
+.inputDate {
+  border-radius: 10px !important;
+  padding: 10px !important;
+  border: 1px solid #debccc !important;
+  font-family: "Crimson Text", serif;
+  font-size: 0.95rem !important;
+}
+
+.formInput:focus,
 textarea:focus,
 select:focus {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #debccc !important;
@@ -30,6 +40,23 @@ select:focus {
   border-color: #debccc !important;
 }
 
+/* react-select */
+.css-yk16xz-control,
+.css-1pahdxg-control {
+  border-radius: 10px !important;
+  padding: 5px !important;
+  border: 1px solid #debccc !important;
+  font-family: "Crimson Text", serif;
+  font-size: 0.95rem !important;
+}
+
+.css-1pahdxg-control {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #debccc !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #debccc !important;
+  border-color: #debccc !important;
+}
+
+/* Bootstrap button */
 .btn-dark {
   background-color: #df8167;
   border-color: #df8167;

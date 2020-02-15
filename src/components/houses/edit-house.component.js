@@ -49,9 +49,11 @@ class EditHouse extends Component {
   }
 
   handleChangeLocation(e) {
-    this.setState({
-      location: e.target.value
-    });
+    if (e !== null) {
+      this.setState({
+        location: e.value
+      });
+    }
   }
 
   handleChangeDatePurchased(date) {

@@ -28,20 +28,34 @@
   overflow-y: auto;
   height: 50vh;
 }
-
+/* 
 .apiImg {
   height: 180px;
   width: 180px;
-}
+} */
 
 .popoverImg {
   height: 100px;
   width: 100px;
 }
 
-@media (max-width: 500px) {
+@media only screen and (max-width: 400px) {
   .apiImg {
     height: 100px;
     width: 100px;
+  }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 570px) {
+  .apiImg {
+    height: 140px;
+    width: 140px;
+  }
+}
+
+@media only screen and (min-width: 571px) {
+  .apiImg {
+    height: 180px;
+    width: 180px;
   }
 }

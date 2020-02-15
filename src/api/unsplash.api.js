@@ -12,7 +12,8 @@ export const getPeopleUnsplash = async () => {
     .then(toJson)
     .then(json => {
       return json.results;
-    });
+    })
+    .catch(err => console.log(`Error: ${err}`));
   return data;
 };
 
@@ -22,6 +23,7 @@ export const getHouseUnsplash = async () => {
     .then(toJson)
     .then(json => {
       return json.results;
-    });
+    })
+    .catch(err => console.log(`Error: ${err}`));
   return data;
 };

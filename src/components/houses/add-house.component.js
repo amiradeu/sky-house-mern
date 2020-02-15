@@ -20,7 +20,8 @@ class AddHouse extends Component {
       datePurchased: new Date(),
       imgsrc: addOwnerLogo,
       imglist: [],
-      owners: [] //list of owners to choose to associate to a house
+      owners: [],
+      loclist: []
     };
 
     this.handleChangeHousename = this.handleChangeHousename.bind(this);
@@ -29,6 +30,7 @@ class AddHouse extends Component {
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeDatePurchased = this.handleChangeDatePurchased.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
+    this.handleCountry = this.handleCountry.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -38,8 +40,7 @@ class AddHouse extends Component {
     axios.get("http://localhost:5000/owners/").then(res => {
       if (res.data.length > 0) {
         this.setState({
-          owners: res.data.map(owner => owner.ownername),
-          ownername: res.data[0].ownername
+          owners: res.data.map(owner => owner.ownername)
         });
       }
     });
@@ -64,9 +65,11 @@ class AddHouse extends Component {
   }
 
   handleChangeLocation(e) {
-    this.setState({
-      location: e.target.value
-    });
+    if (e !== null) {
+      this.setState({
+        location: e.value
+      });
+    }
   }
 
   handleChangeDatePurchased(date) {
@@ -103,6 +106,7 @@ class AddHouse extends Component {
     let imagelist = this.state.imglist.map(src => {
       return src;
     });
+
     const popover = (
       <Popover id="popover-positioned-bottom">
         <Popover.Title as="h3">Choose image</Popover.Title>
@@ -141,6 +145,7 @@ class AddHouse extends Component {
           handleChangeImage={this.handleChangeImage}
           handleSubmit={this.handleSubmit}
           buttonText={buttonText}
+          handleCountry={this.handleCountry}
         ></FormHouse>
       </React.Fragment>
     );
