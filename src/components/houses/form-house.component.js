@@ -53,20 +53,10 @@ const FormHouse = props => {
         <Form.Label>Location</Form.Label>
         <Form.Row>
           <Col xs={12} md={6}>
-            {/* <Form.Control
-                required
-                type="text"
-                name="location"
-                value={props.state.location}
-                onChange={props.handleChangeLocation}
-                placeholder="Country"
-                className="formInput"
-              /> */}
             <Form.Group>
-              location: {props.state.location}
               <Select
                 options={data}
-                placeholder={props.state.location}
+                placeholder={props.state.oriLocation}
                 isSearchable="true"
                 isClearable={true}
                 name="location"
@@ -76,18 +66,13 @@ const FormHouse = props => {
           </Col>
           <Col xs={12} md={6}>
             <Form.Group>
-              <Select options={data} isSearchable="true" isClearable={true} />
+              <Select
+                options={props.stateOptions}
+                placeholder="Select state..."
+                isSearchable="true"
+                isClearable={true}
+              />
             </Form.Group>
-            {/* <Form.Control
-                // disabled
-                type="text"
-                // name="location"
-                // value={props.state.location}
-                // onChange={props.handleChangeLocation}
-                placeholder="State"
-                autoComplete="off"
-                className="formInput"
-              /> */}
           </Col>
         </Form.Row>
         <Form.Group>

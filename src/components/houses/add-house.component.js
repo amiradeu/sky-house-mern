@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { Col, Image, Popover } from "react-bootstrap";
 import { getHouseUnsplash } from "../../api/unsplash.api";
+import { stateList } from "../../data/location";
+
 import axios from "axios";
 
 import FormHouse from "./form-house.component";
 import addOwnerLogo from "../../assets/images/add.png";
 import "react-datepicker/dist/react-datepicker.css";
 import "./form.css";
+
+let stateOptions = [];
 
 class AddHouse extends Component {
   constructor(props) {
@@ -30,7 +34,6 @@ class AddHouse extends Component {
     this.handleChangeLocation = this.handleChangeLocation.bind(this);
     this.handleChangeDatePurchased = this.handleChangeDatePurchased.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
-    this.handleCountry = this.handleCountry.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -44,6 +47,15 @@ class AddHouse extends Component {
         });
       }
     });
+  }
+
+  handleChangeLocation(e) {
+    if (e !== null) {
+      stateOptions = stateList(e.value);
+      this.setState({
+        location: e.value
+      });
+    }
   }
 
   handleChangeHousename(e) {
@@ -62,14 +74,6 @@ class AddHouse extends Component {
     this.setState({
       description: e.target.value
     });
-  }
-
-  handleChangeLocation(e) {
-    if (e !== null) {
-      this.setState({
-        location: e.value
-      });
-    }
   }
 
   handleChangeDatePurchased(date) {
@@ -132,11 +136,13 @@ class AddHouse extends Component {
         </Popover.Content>
       </Popover>
     );
+
     return (
       <React.Fragment>
         <FormHouse
           state={this.state}
           popover={popover}
+          stateOptions={stateOptions}
           handleChangeHousename={this.handleChangeHousename}
           handleChangeDescription={this.handleChangeDescription}
           handleChangeOwnername={this.handleChangeOwnername}
@@ -145,7 +151,6 @@ class AddHouse extends Component {
           handleChangeImage={this.handleChangeImage}
           handleSubmit={this.handleSubmit}
           buttonText={buttonText}
-          handleCountry={this.handleCountry}
         ></FormHouse>
       </React.Fragment>
     );

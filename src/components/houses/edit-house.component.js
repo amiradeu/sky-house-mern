@@ -5,6 +5,9 @@ import { Col, Image, Popover } from "react-bootstrap";
 import "../models.css";
 import { getHouseUnsplash } from "../../api/unsplash.api";
 import FormHouse from "./form-house.component";
+import { stateList } from "../../data/location";
+
+let stateOptions = [];
 
 class EditHouse extends Component {
   constructor(props) {
@@ -15,6 +18,7 @@ class EditHouse extends Component {
       description: "",
       ownername: "",
       location: "",
+      oriLocation: "",
       datePurchased: new Date(),
       imgsrc: "",
       imglist: [],
@@ -28,6 +32,15 @@ class EditHouse extends Component {
     this.handleChangeDatePurchased = this.handleChangeDatePurchased.bind(this);
     this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChangeLocation(e) {
+    if (e !== null) {
+      stateOptions = stateList(e.value);
+      this.setState({
+        location: e.value
+      });
+    }
   }
 
   handleChangeHousename(e) {
@@ -46,14 +59,6 @@ class EditHouse extends Component {
     this.setState({
       description: e.target.value
     });
-  }
-
-  handleChangeLocation(e) {
-    if (e !== null) {
-      this.setState({
-        location: e.value
-      });
-    }
   }
 
   handleChangeDatePurchased(date) {
@@ -76,6 +81,7 @@ class EditHouse extends Component {
           description: res.data.description,
           ownername: res.data.ownername,
           location: res.data.location,
+          oriLocation: res.data.location,
           datePurchased: new Date(res.data.datePurchased),
           imgsrc: res.data.imgsrc
         });
@@ -149,6 +155,7 @@ class EditHouse extends Component {
         <FormHouse
           state={this.state}
           popover={popover}
+          stateOptions={stateOptions}
           handleChangeHousename={this.handleChangeHousename}
           handleChangeDescription={this.handleChangeDescription}
           handleChangeOwnername={this.handleChangeOwnername}
