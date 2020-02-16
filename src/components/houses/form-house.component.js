@@ -64,7 +64,7 @@ const FormHouse = props => {
               />
             </Form.Group>
           </Col>
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} style={{ display: props.state.showState }}>
             <Form.Group>
               <Select
                 options={props.stateOptions}
@@ -110,6 +110,7 @@ const FormHouse = props => {
           <div>
             <DatePicker
               required
+              dateFormat="dd/MM/yyyy"
               selected={props.state.datePurchased}
               onChange={props.handleChangeDatePurchased}
               className="inputDate"

@@ -40,6 +40,22 @@ select:focus {
   border-color: #debccc !important;
 }
 
+/* react-datepicker */
+.react-datepicker {
+  border: 1px solid #debccc !important;
+}
+
+.react-datepicker__header,
+.react-datepicker__day--selected {
+  border-bottom: 1px solid #debccc !important;
+  background-color: #5c9fe0;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: #fff;
+}
+
 /* react-select */
 .css-yk16xz-control,
 .css-1pahdxg-control {

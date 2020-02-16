@@ -15,12 +15,12 @@ let stateOptions = [];
 class AddHouse extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       housename: "",
       description: "",
       ownername: "",
       location: "",
+      showState: "none",
       datePurchased: new Date(),
       imgsrc: addOwnerLogo,
       imglist: [],
@@ -53,7 +53,8 @@ class AddHouse extends Component {
     if (e !== null) {
       stateOptions = stateList(e.value);
       this.setState({
-        location: e.value
+        location: e.value,
+        showState: "block"
       });
     }
   }
