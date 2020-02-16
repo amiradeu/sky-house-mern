@@ -56,6 +56,11 @@ class AddHouse extends Component {
         location: e.value,
         showState: "block"
       });
+    } else {
+      this.setState({
+        location: "",
+        showState: "none"
+      });
     }
   }
 
@@ -140,6 +145,7 @@ class AddHouse extends Component {
 
     return (
       <React.Fragment>
+        {this.state.location}
         <FormHouse
           state={this.state}
           popover={popover}

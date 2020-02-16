@@ -56,7 +56,11 @@ const FormHouse = props => {
             <Form.Group>
               <Select
                 options={data}
-                placeholder={props.state.oriLocation}
+                placeholder={
+                  props.state.oriLocation == ""
+                    ? props.state.oriLocation
+                    : "Select country..."
+                }
                 isSearchable="true"
                 isClearable={true}
                 name="location"
