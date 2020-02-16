@@ -10,20 +10,26 @@ router.route("/").get((req, res) => {
 
 //2nd HTTP POST req endpoint - /houses/add
 router.route("/add").post((req, res) => {
-  const housename = req.body.housename;
-  const ownername = req.body.ownername;
+  const houseName = req.body.houseName;
+  const houseImg = req.body.houseImg;
+  const price = req.body.price;
+  const country = req.body.country;
+  const city = req.body.city;
+  const coordinateX = req.body.coordinateX;
+  const coordinateY = req.body.coordinateY;
   const description = req.body.description;
-  const location = req.body.location;
-  const datePurchased = Date.parse(req.body.datePurchased);
-  const imgsrc = req.body.imgsrc;
+  const ownerId = req.body.ownerId;
 
   const newHouse = new House({
-    housename,
-    ownername,
+    houseName,
+    houseImg,
+    price,
+    country,
+    city,
+    coordinateX,
+    coordinateY,
     description,
-    location,
-    datePurchased,
-    imgsrc
+    ownerId
   });
 
   newHouse
@@ -50,12 +56,15 @@ router.route("/:id").delete((req, res) => {
 router.route("/edit/:id").post((req, res) => {
   House.findById(req.params.id)
     .then(house => {
-      house.housename = req.body.housename;
-      house.ownername = req.body.ownername;
+      house.houseName = req.body.houseName;
+      house.houseImg = req.body.houseImg;
+      house.price = req.body.price;
+      house.country = req.body.country;
+      house.city = req.body.city;
+      house.coordinateX = req.body.coordinateX;
+      house.coordinateY = req.body.coordinateY;
       house.description = req.body.description;
-      house.location = req.body.location;
-      house.datePurchased = Date.parse(req.body.datePurchased);
-      house.imgsrc = req.body.imgsrc;
+      house.ownerId = req.body.ownerId;
 
       house
         .save()

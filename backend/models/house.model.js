@@ -5,12 +5,15 @@ const Schema = mongoose.Schema;
 //create the house schema
 const houseSchema = new Schema(
   {
-    housename: { type: String, required: true },
-    ownername: { type: String, required: false },
+    houseName: { type: String, required: true },
+    houseImg: { type: String, required: true },
+    price: { type: Number, required: true },
+    country: { type: String, required: true },
+    city: { type: String, required: true },
+    coordinateX: { type: Number, required: true },
+    coordinateY: { type: Number, required: true },
     description: { type: String, required: true },
-    location: { type: String, required: true },
-    datePurchased: { type: Date, required: true },
-    imgsrc: { type: String, required: true }
+    ownerId: { type: Number, required: false }
   },
   {
     timestamps: true
@@ -19,5 +22,4 @@ const houseSchema = new Schema(
 
 //create model for it
 const House = mongoose.model("House", houseSchema);
-
 module.exports = House;

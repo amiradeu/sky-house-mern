@@ -1,78 +1,97 @@
 import React, { Component } from "react";
-import { Col, Image, Popover } from "react-bootstrap";
 import { getHouseUnsplash } from "../../api/unsplash.api";
-import { stateList } from "../../data/location";
-
+import { getStatelist, getCoordinate } from "../../data/location";
 import axios from "axios";
-
-import FormHouse from "./form-house.component";
+import FormHouse from "./form-house/form-house.component";
 import addOwnerLogo from "../../assets/images/add.png";
-import "react-datepicker/dist/react-datepicker.css";
-import "./form.css";
-
+import "./form-house/form.css";
 let stateOptions = [];
+let coordinate = [];
 
 class AddHouse extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      housename: "",
+      houseName: "",
+      houseImg: addOwnerLogo,
+      price: 0,
+      country: "",
+      city: "",
+      coordinateX: 0,
+      coordinateY: 0,
       description: "",
-      ownername: "",
-      location: "",
+      ownerId: 0,
       showState: "none",
-      datePurchased: new Date(),
-      imgsrc: addOwnerLogo,
-      imglist: [],
-      owners: [],
-      loclist: []
+      imgOptions: []
     };
 
     this.handleChangeHousename = this.handleChangeHousename.bind(this);
-    this.handleChangeOwnername = this.handleChangeOwnername.bind(this);
+    this.handleChangeHouseimg = this.handleChangeHouseimg.bind(this);
+    this.handleChangePrice = this.handleChangePrice.bind(this);
+    this.handleChangeCountry = this.handleChangeCountry.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+    this.handleChangeCoordinate = this.handleChangeCoordinate.bind(this);
     this.handleChangeDescription = this.handleChangeDescription.bind(this);
-    this.handleChangeLocation = this.handleChangeLocation.bind(this);
-    this.handleChangeDatePurchased = this.handleChangeDatePurchased.bind(this);
-    this.handleChangeImage = this.handleChangeImage.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    getHouseUnsplash().then(res => this.setState({ imglist: res }));
+    getHouseUnsplash().then(res => this.setState({ imgOptions: res }));
+  }
 
-    axios.get("http://localhost:5000/owners/").then(res => {
-      if (res.data.length > 0) {
-        this.setState({
-          owners: res.data.map(owner => owner.ownername)
-        });
-      }
+  handleChangeHousename(e) {
+    this.setState({
+      houseName: e.target.value
     });
   }
 
-  handleChangeLocation(e) {
+  handleChangeHouseimg(e) {
+    this.setState({
+      houseImg: e.target.value
+    });
+  }
+
+  handleChangePrice(e) {
+    this.setState({
+      price: e.target.value
+    });
+  }
+
+  handleChangeCountry(e) {
     if (e !== null) {
-      stateOptions = stateList(e.value);
+      stateOptions = getStatelist(e.value);
       this.setState({
-        location: e.value,
+        country: e.value,
         showState: "block"
       });
     } else {
       this.setState({
-        location: "",
+        country: "",
         showState: "none"
       });
     }
   }
 
-  handleChangeHousename(e) {
-    this.setState({
-      housename: e.target.value
-    });
+  handleChangeCity(e) {
+    if (e !== null) {
+      this.setState({
+        city: e.value
+      });
+      this.handleChangeCoordinate(e.value);
+    } else {
+      this.setState({
+        city: "",
+        coordinateX: 0,
+        coordinateY: 0
+      });
+    }
   }
 
-  handleChangeOwnername(e) {
+  handleChangeCoordinate(stateValue) {
+    coordinate = getCoordinate(stateValue);
     this.setState({
-      ownername: e.target.value
+      coordinateX: coordinate[0],
+      coordinateY: coordinate[1]
     });
   }
 
@@ -82,26 +101,19 @@ class AddHouse extends Component {
     });
   }
 
-  handleChangeDatePurchased(date) {
-    this.setState({
-      datePurchased: date
-    });
-  }
-
-  handleChangeImage(e) {
-    this.setState({ imgsrc: e.target.value });
-  }
-
   handleSubmit(e) {
     e.preventDefault();
 
     const house = {
-      housename: this.state.housename,
+      houseName: this.state.houseName,
+      houseImg: this.state.houseImg,
+      price: this.state.price,
+      country: this.state.country,
+      city: this.state.city,
+      coordinateX: this.state.coordinateX,
+      coordinateY: this.state.coordinateY,
       description: this.state.description,
-      ownername: this.state.ownername,
-      location: this.state.location,
-      datePurchased: this.state.datePurchased,
-      imgsrc: this.state.imgsrc
+      ownerId: this.state.ownerId
     };
 
     axios
@@ -113,51 +125,20 @@ class AddHouse extends Component {
 
   render() {
     const buttonText = "Add House";
-    let imagelist = this.state.imglist.map(src => {
-      return src;
-    });
-
-    const popover = (
-      <Popover id="popover-positioned-bottom">
-        <Popover.Title as="h3">Choose image</Popover.Title>
-        <Popover.Content>
-          <Col>
-            {imagelist.map(src => (
-              <React.Fragment key={src.id}>
-                <label>
-                  <input
-                    type="radio"
-                    name="img"
-                    value={src.urls.regular}
-                    onChange={this.handleChangeImage}
-                  />
-                  <Image
-                    src={src.urls.regular}
-                    className="rounded-circle p-2 popoverImg"
-                  ></Image>
-                </label>
-              </React.Fragment>
-            ))}
-          </Col>
-        </Popover.Content>
-      </Popover>
-    );
 
     return (
       <React.Fragment>
-        {this.state.location}
         <FormHouse
           state={this.state}
-          popover={popover}
           stateOptions={stateOptions}
-          handleChangeHousename={this.handleChangeHousename}
-          handleChangeDescription={this.handleChangeDescription}
-          handleChangeOwnername={this.handleChangeOwnername}
-          handleChangeLocation={this.handleChangeLocation}
-          handleChangeDatePurchased={this.handleChangeDatePurchased}
-          handleChangeImage={this.handleChangeImage}
-          handleSubmit={this.handleSubmit}
           buttonText={buttonText}
+          handleChangeHousename={this.handleChangeHousename}
+          handleChangeHouseimg={this.handleChangeHouseimg}
+          handleChangePrice={this.handleChangePrice}
+          handleChangeCountry={this.handleChangeCountry}
+          handleChangeCity={this.handleChangeCity}
+          handleChangeDescription={this.handleChangeDescription}
+          handleSubmit={this.handleSubmit}
         ></FormHouse>
       </React.Fragment>
     );

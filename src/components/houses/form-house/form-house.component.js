@@ -1,12 +1,45 @@
 import React from "react";
-import { Form, Button, Col, Image, OverlayTrigger } from "react-bootstrap";
-import DatePicker from "react-datepicker";
+import {
+  Form,
+  Button,
+  Col,
+  Image,
+  OverlayTrigger,
+  Popover
+} from "react-bootstrap";
 import Select from "react-select";
-import { countryList } from "../../data/location";
+import { getCountrylist } from "../../../data/location";
+import HideInput from "./hide-input.component";
 
-const data = countryList();
+const data = getCountrylist();
 
 const FormHouse = props => {
+  const popover = (
+    <Popover id="popover-positioned-bottom">
+      <Popover.Title as="h3">Choose image</Popover.Title>
+      <Popover.Content>
+        <Col>
+          {props.state.imgOptions.map(src => (
+            <React.Fragment key={src.id}>
+              <label>
+                <input
+                  type="radio"
+                  name="img"
+                  value={src.urls.regular}
+                  onChange={props.handleChangeHouseimg}
+                />
+                <Image
+                  src={src.urls.regular}
+                  className="rounded-circle p-2 popoverImg"
+                ></Image>
+              </label>
+            </React.Fragment>
+          ))}
+        </Col>
+      </Popover.Content>
+    </Popover>
+  );
+
   return (
     <React.Fragment>
       <Form onSubmit={props.handleSubmit}>
@@ -15,11 +48,11 @@ const FormHouse = props => {
             <Form.Group>
               <Form.Label>Title</Form.Label>
               <Form.Control
-                placeholder="House name"
+                placeholder="Enter house name..."
                 required
                 type="text"
                 name="housename"
-                value={props.state.housename}
+                value={props.state.houseName}
                 onChange={props.handleChangeHousename}
                 autoComplete="off"
                 className="formInput"
@@ -33,6 +66,8 @@ const FormHouse = props => {
                 name="price"
                 placeholder="$USD per night"
                 className="formInput"
+                value={props.state.price}
+                onChange={props.handleChangePrice}
               />
             </Form.Group>
           </Form.Group>
@@ -41,10 +76,10 @@ const FormHouse = props => {
               trigger="click"
               key="bottom"
               placement="bottom"
-              overlay={props.popover}
+              overlay={popover}
             >
               <Image
-                src={props.state.imgsrc}
+                src={props.state.houseImg}
                 className="rounded-circle p-2 apiImg"
               ></Image>
             </OverlayTrigger>
@@ -57,26 +92,32 @@ const FormHouse = props => {
               <Select
                 options={data}
                 placeholder={
-                  props.state.oriLocation == ""
-                    ? props.state.oriLocation
-                    : "Select country..."
+                  props.state.country === ""
+                    ? "Select country..."
+                    : props.state.country
                 }
                 isSearchable="true"
                 isClearable={true}
-                name="location"
-                onChange={props.handleChangeLocation}
+                name="country"
+                onChange={props.handleChangeCountry}
               />
             </Form.Group>
+            <HideInput dataInput={props.state.country}></HideInput>
           </Col>
           <Col xs={12} md={6} style={{ display: props.state.showState }}>
             <Form.Group>
               <Select
                 options={props.stateOptions}
-                placeholder="Select state..."
+                placeholder={
+                  props.state.city === "" ? "Select state..." : props.state.city
+                }
                 isSearchable="true"
                 isClearable={true}
+                name="state"
+                onChange={props.handleChangeCity}
               />
             </Form.Group>
+            <HideInput dataInput={props.state.city}></HideInput>
           </Col>
         </Form.Row>
         <Form.Group>
@@ -91,37 +132,6 @@ const FormHouse = props => {
             placeholder="Enter a description of the house..."
           />
         </Form.Group>
-        <Form.Group>
-          <Form.Label>Owner name</Form.Label>
-          <Form.Control
-            as="select"
-            name="ownername"
-            value={props.state.ownername}
-            onChange={props.handleChangeOwnername}
-          >
-            <option hidden>Choose User</option>
-            {props.state.owners.map(owner => {
-              return (
-                <option key={owner} value={owner}>
-                  {owner}
-                </option>
-              );
-            })}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Date Purchased</Form.Label>
-          <div>
-            <DatePicker
-              required
-              dateFormat="dd/MM/yyyy"
-              selected={props.state.datePurchased}
-              onChange={props.handleChangeDatePurchased}
-              className="inputDate"
-            />
-          </div>
-        </Form.Group>
-
         <Button variant="dark" type="submit">
           {props.buttonText}
         </Button>

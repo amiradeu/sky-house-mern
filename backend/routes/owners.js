@@ -10,10 +10,25 @@ router.route("/").get((req, res) => {
 
 //2nd HTTP POST req endpoint - /owners/add
 router.route("/add").post((req, res) => {
-  const ownername = req.body.ownername;
-  const imgsrc = req.body.imgsrc;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const ownerImg = req.body.ownerImg;
+  const birthDate = Date.parse(req.body.birthDate);
+  const country = req.body.country;
+  const state = req.body.state;
+  const coordinateX = req.body.coordinateX;
+  const coordinateY = req.body.coordinateY;
 
-  const newOwner = new Owner({ ownername, imgsrc });
+  const newOwner = new Owner({
+    firstName,
+    lastName,
+    ownerImg,
+    birthDate,
+    country,
+    state,
+    coordinateX,
+    coordinateY
+  });
 
   newOwner
     .save()
@@ -39,8 +54,15 @@ router.route("/:id").delete((req, res) => {
 router.route("/edit/:id").post((req, res) => {
   Owner.findById(req.params.id)
     .then(owner => {
-      owner.ownername = req.body.ownername;
-      owner.imgsrc = req.body.imgsrc;
+      owner.firstName = req.body.firstName;
+      owner.lastName = req.body.lastName;
+      owner.ownerImg = req.body.ownerImg;
+      owner.birthDate = Date.parse(req.body.birthDate);
+      owner.country = req.body.country;
+      owner.state = req.body.state;
+      owner.coordinateX = req.body.coordinateX;
+      owner.coordinateY = req.body.coordinateY;
+
       owner
         .save()
         .then(() => res.json("Owner updated!"))

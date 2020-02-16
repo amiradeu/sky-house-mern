@@ -1,6 +1,6 @@
 import { worldData } from "./worldData.js";
 
-export const countryList = () => {
+export const getCountrylist = () => {
   const country = worldData.map(loc => loc.country);
   const uniqueCountry = [...new Set(country)].sort();
 
@@ -10,7 +10,7 @@ export const countryList = () => {
   });
 };
 
-export const stateList = country => {
+export const getStatelist = country => {
   const state = worldData
     .filter(loc => {
       return loc.country === country;
@@ -21,4 +21,12 @@ export const stateList = country => {
     });
 
   return state;
+};
+
+export const getCoordinate = city => {
+  const data = worldData.filter(loc => {
+    return loc.city === city;
+  });
+  let coordinate = [data[0].lat, data[0].lng];
+  return coordinate;
 };

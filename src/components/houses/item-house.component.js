@@ -17,27 +17,29 @@ function House(props) {
     <React.Fragment>
       <Card>
         <Card.Header>
-          <div className="locationCard">{props.house.location}</div>
+          <div className="locationCard">
+            {props.house.city}, {props.house.country}
+          </div>
           <IoIosArrowDown className="expandCard" size={26}></IoIosArrowDown>
         </Card.Header>
         <Card.Img
           variant="top"
-          src={props.house.imgsrc}
+          src={props.house.houseImg}
           alt="house"
           className="rounded-circle mx-auto d-block"
         />
         <Card.Img
           variant="bottom"
-          src={props.house.imgsrc}
+          src={props.house.houseImg}
           alt="owner"
           className="rounded-circle mx-auto d-block"
         />
         <Card.Body>
           <Card.Title className="text-center text-uppercase">
-            {props.house.housename}
+            {props.house.houseName}
           </Card.Title>
           <Card.Subtitle className="text-center">
-            <span className="price">$100</span>/ night
+            <span className="price">${props.house.price}</span>/ night
           </Card.Subtitle>
           <Card.Text className="mt-2">{cardText}</Card.Text>
         </Card.Body>

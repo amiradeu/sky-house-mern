@@ -5,6 +5,7 @@ import "../models.css";
 import addOwnerLogo from "../../assets/images/add.png";
 import { getPeopleUnsplash } from "../../api/unsplash.api";
 import FormOwner from "./form-owner.component";
+import "react-datepicker/dist/react-datepicker.css";
 
 class CreateOwner extends Component {
   constructor(props) {
@@ -33,6 +34,12 @@ class CreateOwner extends Component {
 
   handleChangeImage(e) {
     this.setState({ imgsrc: e.target.value });
+  }
+
+  handleChangeDatePurchased(date) {
+    this.setState({
+      datePurchased: date
+    });
   }
 
   handleSubmit(e) {

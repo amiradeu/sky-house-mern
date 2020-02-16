@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Button, OverlayTrigger, Col, Image } from "react-bootstrap";
+// import DatePicker from "react-datepicker";
 
 const FormOwner = props => {
   return (
@@ -33,6 +34,36 @@ const FormOwner = props => {
             </OverlayTrigger>
           </Form.Group>
         </Form.Row>
+        {/* <Form.Group>
+          <Form.Label>Owner name</Form.Label>
+          <Form.Control
+            as="select"
+            name="ownername"
+            value={props.state.ownername}
+            onChange={props.handleChangeOwnername}
+          >
+            <option hidden>Choose User</option>
+            {props.state.owners.map(owner => {
+              return (
+                <option key={owner} value={owner}>
+                  {owner}
+                </option>
+              );
+            })}
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Date Purchased</Form.Label>
+          <div>
+            <DatePicker
+              required
+              dateFormat="dd/MM/yyyy"
+              selected={props.state.datePurchased}
+              onChange={props.handleChangeDatePurchased}
+              className="inputDate"
+            />
+          </div>
+        </Form.Group> */}
         <Button variant="dark" type="submit">
           Save Changes
         </Button>
