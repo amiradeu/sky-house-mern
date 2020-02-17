@@ -15,6 +15,8 @@ class AddHouse extends Component {
       houseName: "",
       houseImg: addOwnerLogo,
       price: 0,
+      bedroom: 0,
+      bathroom: 0,
       country: "",
       city: "",
       coordinateX: 0,
@@ -28,6 +30,8 @@ class AddHouse extends Component {
     this.handleChangeHousename = this.handleChangeHousename.bind(this);
     this.handleChangeHouseimg = this.handleChangeHouseimg.bind(this);
     this.handleChangePrice = this.handleChangePrice.bind(this);
+    this.handleChangeBedroom = this.handleChangeBedroom.bind(this);
+    this.handleChangeBathroom = this.handleChangeBathroom.bind(this);
     this.handleChangeCountry = this.handleChangeCountry.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeCoordinate = this.handleChangeCoordinate.bind(this);
@@ -54,6 +58,18 @@ class AddHouse extends Component {
   handleChangePrice(e) {
     this.setState({
       price: e.target.value
+    });
+  }
+
+  handleChangeBedroom(e) {
+    this.setState({
+      bedroom: e.target.value
+    });
+  }
+
+  handleChangeBathroom(e) {
+    this.setState({
+      bathroom: e.target.value
     });
   }
 
@@ -108,6 +124,8 @@ class AddHouse extends Component {
       houseName: this.state.houseName,
       houseImg: this.state.houseImg,
       price: this.state.price,
+      numOfBedroom: this.state.bedroom,
+      numofBathroom: this.state.bathroom,
       country: this.state.country,
       city: this.state.city,
       coordinateX: this.state.coordinateX,
@@ -135,6 +153,8 @@ class AddHouse extends Component {
           handleChangeHousename={this.handleChangeHousename}
           handleChangeHouseimg={this.handleChangeHouseimg}
           handleChangePrice={this.handleChangePrice}
+          handleChangeBedroom={this.handleChangeBedroom}
+          handleChangeBathroom={this.handleChangeBathroom}
           handleChangeCountry={this.handleChangeCountry}
           handleChangeCity={this.handleChangeCity}
           handleChangeDescription={this.handleChangeDescription}

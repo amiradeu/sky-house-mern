@@ -1,5 +1,9 @@
+/*************
+Provided by Pareto Software, LLC, the owner of Simplemaps.com. 
+**************/
+
 export const worldData = [
-    {
+  {
     city: "Tokyo",
     city_ascii: "Tokyo",
     lat: 35.685,
@@ -201408,4 +201412,4 @@ export const worldData = [
     population: 0,
     id: 1124019423
   }
-]
+];

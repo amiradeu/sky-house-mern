@@ -8,6 +8,8 @@ const houseSchema = new Schema(
     houseName: { type: String, required: true },
     houseImg: { type: String, required: true },
     price: { type: Number, required: true },
+    numOfBedroom: { type: Number, required: true },
+    numofBathroom: { type: Number, required: true },
     country: { type: String, required: true },
     city: { type: String, required: true },
     coordinateX: { type: Number, required: true },

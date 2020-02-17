@@ -17,6 +17,8 @@ class EditHouse extends Component {
       houseName: "",
       houseImg: "",
       price: 0,
+      bedroom: 0,
+      bathroom: 0,
       country: "",
       city: "",
       coordinateX: 0,
@@ -30,6 +32,8 @@ class EditHouse extends Component {
     this.handleChangeHousename = this.handleChangeHousename.bind(this);
     this.handleChangeHouseimg = this.handleChangeHouseimg.bind(this);
     this.handleChangePrice = this.handleChangePrice.bind(this);
+    this.handleChangeBedroom = this.handleChangeBedroom.bind(this);
+    this.handleChangeBathroom = this.handleChangeBathroom.bind(this);
     this.handleChangeCountry = this.handleChangeCountry.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeCoordinate = this.handleChangeCoordinate.bind(this);
@@ -46,6 +50,8 @@ class EditHouse extends Component {
           houseName: res.data.houseName,
           houseImg: res.data.houseImg,
           price: res.data.price,
+          bedroom: res.data.numOfBedroom,
+          bathroom: res.data.numofBathroom,
           country: res.data.country,
           city: res.data.city,
           coordinateX: res.data.coordinateX,
@@ -74,6 +80,18 @@ class EditHouse extends Component {
   handleChangePrice(e) {
     this.setState({
       price: e.target.value
+    });
+  }
+
+  handleChangeBedroom(e) {
+    this.setState({
+      bedroom: e.target.value
+    });
+  }
+
+  handleChangeBathroom(e) {
+    this.setState({
+      bathroom: e.target.value
     });
   }
 
@@ -128,6 +146,8 @@ class EditHouse extends Component {
       houseName: this.state.houseName,
       houseImg: this.state.houseImg,
       price: this.state.price,
+      numOfBedroom: this.state.bedroom,
+      numofBathroom: this.state.bathroom,
       country: this.state.country,
       city: this.state.city,
       coordinateX: this.state.coordinateX,
@@ -135,7 +155,7 @@ class EditHouse extends Component {
       description: this.state.description,
       ownerId: this.state.ownerId
     };
-
+    console.log(house);
     axios
       .post(
         "http://localhost:5000/houses/edit/" + this.props.match.params.id,
@@ -155,6 +175,8 @@ class EditHouse extends Component {
           stateOptions={stateOptions}
           handleChangeHousename={this.handleChangeHousename}
           handleChangePrice={this.handleChangePrice}
+          handleChangeBedroom={this.handleChangeBedroom}
+          handleChangeBathroom={this.handleChangeBathroom}
           handleChangeDescription={this.handleChangeDescription}
           handleChangeOwnername={this.handleChangeOwnername}
           handleChangeLocation={this.handleChangeLocation}

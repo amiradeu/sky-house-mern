@@ -85,6 +85,37 @@ const FormHouse = props => {
             </OverlayTrigger>
           </Form.Group>
         </Form.Row>
+
+        <Form.Row>
+          <Col xs={6}>
+            <Form.Label>Bedroom</Form.Label>
+            <Form.Group>
+              <Form.Control
+                required
+                type="number"
+                name="numOfBedroom"
+                className="formInput"
+                placeholder="Number of bedroom..."
+                value={props.state.bedroom}
+                onChange={props.handleChangeBedroom}
+              />
+            </Form.Group>
+          </Col>
+          <Col xs={6}>
+            <Form.Label>Bathroom</Form.Label>
+            <Form.Group>
+              <Form.Control
+                required
+                type="number"
+                name="numOfBathroom"
+                className="formInput"
+                placeholder="Number of bathroom..."
+                value={props.state.bathroom}
+                onChange={props.handleChangeBathroom}
+              />
+            </Form.Group>
+          </Col>
+        </Form.Row>
         <Form.Label>Location</Form.Label>
         <Form.Row>
           <Col xs={12} md={6}>

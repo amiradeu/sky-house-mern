@@ -13,6 +13,8 @@ router.route("/add").post((req, res) => {
   const houseName = req.body.houseName;
   const houseImg = req.body.houseImg;
   const price = req.body.price;
+  const numOfBedroom = req.body.numOfBedroom;
+  const numofBathroom = req.body.numofBathroom;
   const country = req.body.country;
   const city = req.body.city;
   const coordinateX = req.body.coordinateX;
@@ -29,7 +31,9 @@ router.route("/add").post((req, res) => {
     coordinateX,
     coordinateY,
     description,
-    ownerId
+    ownerId,
+    numOfBedroom,
+    numofBathroom
   });
 
   newHouse
@@ -59,6 +63,8 @@ router.route("/edit/:id").post((req, res) => {
       house.houseName = req.body.houseName;
       house.houseImg = req.body.houseImg;
       house.price = req.body.price;
+      house.numOfBedroom = req.body.numOfBedroom;
+      house.numofBathroom = req.body.numofBathroom;
       house.country = req.body.country;
       house.city = req.body.city;
       house.coordinateX = req.body.coordinateX;

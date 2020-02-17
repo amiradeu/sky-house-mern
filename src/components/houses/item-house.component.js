@@ -45,7 +45,7 @@ function House(props) {
         </Card.Body>
         <Card.Footer className="mx-auto d-block">
           <h3>
-            3
+            {props.house.numOfBedroom}
             <img
               src={bed}
               alt="bed"
@@ -53,7 +53,7 @@ function House(props) {
               width="30px"
               className="mx-2"
             ></img>
-            2
+            {props.house.numofBathroom}
             <img
               src={baththub}
               alt="bath"
