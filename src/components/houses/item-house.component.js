@@ -18,7 +18,8 @@ function House(props) {
       <Card>
         <Card.Header>
           <div className="locationCard">
-            {props.house.city}, {props.house.country}
+            {props.house.city},<br></br>
+            {props.house.country}
           </div>
           <IoIosArrowDown className="expandCard" size={26}></IoIosArrowDown>
         </Card.Header>
