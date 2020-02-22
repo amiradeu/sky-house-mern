@@ -20,6 +20,7 @@
 .env.production.local
 /backend/.env
 .env
+/mern-app.code-workspace
 
 npm-debug.log*
 yarn-debug.log*

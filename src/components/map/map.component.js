@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import axios from "axios";
-
 import MapMarker from "./marker.component";
-
-const M_SIZE = 40;
-
+import markerPNG from "../../assets/images/marker.png";
+import markerHoverPNG from "../../assets/images/marker-hover.png";
 class Map extends Component {
   constructor(props) {
     super(props);
     this.state = {
       houses: []
-      // styling: markerStyle
     };
   }
 
@@ -22,7 +19,6 @@ class Map extends Component {
         this.setState({
           houses: res.data
         });
-        console.log(this.state.houses);
       })
       .catch(err => console.log(`Error: ${err}`));
   }
@@ -48,6 +44,24 @@ class Map extends Component {
     console.log("mouse click");
   };
 
+  renderMarkers(map, maps) {
+    let infowindow = new maps.InfoWindow({
+      content: "lorem ipsum akdakdn adj ladjl ja kjl jasl"
+    });
+
+    let marker = new maps.Marker({
+      position: { lat: 59.325, lng: 18.07 },
+      map,
+      title: "Hello World!"
+      // icon: { markerPNG }
+      // animation: maps.Animation.DROP
+    });
+
+    marker.addListener("click", function() {
+      infowindow.open(map, marker);
+    });
+  }
+
   render() {
     let MarkerList = this.state.houses.map(house => {
       return (
@@ -60,16 +74,32 @@ class Map extends Component {
       );
     });
 
+    const getMapOptions = {
+      disableDefaultUI: true,
+      mapTypeControl: true,
+      streetViewControl: true,
+      styles: [
+        {
+          featureType: "poi",
+          elementType: "labels",
+          stylers: [{ visibility: "on" }]
+        }
+      ]
+    };
+
     return (
       <div style={{ height: "100vh", width: "100%" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API }}
           defaultCenter={[50, 50]}
           defaultZoom={1}
-          hoverDistance={M_SIZE / 2}
-          // onChildMouseEnter={this._onChildMouseEnter}
-          // onChildMouseLeave={this._onChildMouseLeave}
-          // onChildClick={this._onChildClick}
+          hoverDistance={40}
+          options={getMapOptions}
+          onChildMouseEnter={this._onChildMouseEnter}
+          onChildMouseLeave={this._onChildMouseLeave}
+          onChildClick={this._onChildClick}
+          yesIWantToUseGoogleMapApiInternals
+          onGoogleApiLoaded={({ map, maps }) => this.renderMarkers(map, maps)}
         >
           {MarkerList}
         </GoogleMapReact>

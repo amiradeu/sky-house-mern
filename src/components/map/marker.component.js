@@ -1,6 +1,8 @@
-import React, { PropTypes, Component } from "react";
+import React, { useState } from "react";
+import { Modal, Button, Toast } from "react-bootstrap";
 import marker from "../../assets/images/marker.png";
 import markerHover from "../../assets/images/marker-hover.png";
+import "./marker.css";
 
 const M_SIZE = 40;
 
@@ -26,36 +28,34 @@ const markerStyleHover = {
   backgroundSize: "cover"
 };
 
-const markerHeaderStyle = {
-  position: "absolute",
-  width: M_SIZE * 2,
-  height: M_SIZE * 1.4,
-  left: -M_SIZE,
-  bottom: M_SIZE * 2,
-  cursor: "pointer"
-};
+const MapMarker = props => {
+  const markerState = props.$hover ? markerStyleHover : markerStyle;
+  const [show, setShow] = useState(false);
 
-class MapMarker extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const markerState = this.props.$hover ? markerStyleHover : markerStyle;
-    return (
-      <React.Fragment>
-        {/* <div style={markerHeaderStyle}>
-          <p>{house.houseName}</p>
+  return (
+    <React.Fragment>
+      <Toast
+        style={{ position: "absolute", width: "300px" }}
+        onClose={() => setShow(false)}
+        show={show}
+        delay={3000}
+        autohide
+      >
+        <Toast.Header>
           <img
-            src={house.houseImg}
-            style={{ width: "50px", height: "50px" }}
-            className="rounded-circle mx-auto d-block"
+            src={props.house.houseImg}
+            style={{ width: "20px", height: "20px" }}
+            className="rounded-circle mr-2"
           ></img>
-        </div> */}
-        <div style={markerState}></div>
-      </React.Fragment>
-    );
-  }
-}
+          <strong className="mr-auto">{props.house.houseName}</strong>
+          <small>${props.house.price}</small>
+        </Toast.Header>
+        <Toast.Body>{props.house.description}</Toast.Body>
+      </Toast>
+      <div style={markerState} onClick={() => setShow(true)}></div>
+      <div className="pulse" onClick={() => setShow(true)}></div>
+    </React.Fragment>
+  );
+};
 
 export default MapMarker;
