@@ -30,78 +30,20 @@ const markerStyleHover = {
 
 const MapMarker = props => {
   const markerState = props.$hover ? markerStyleHover : markerStyle;
-  const [showInfo, setShowInfo] = useState(0);
   const [show, setShow] = useState(false);
+  const toggleShow = () => setShow(!show);
 
   return (
     <React.Fragment>
-      <div
-        style={markerState}
-        onClick={() => {
-          setShowInfo(1);
-          setShow(true);
-          console.log("click to show toast");
-          console.log(`Val: ${showInfo}`);
-        }}
-      />
-      <div className="pulse" onClick={() => setShowInfo(1)}></div>
-      <div
-        className="showInfo"
-        style={{
-          position: "absolute",
-          width: "300px",
-          display: "block",
-          opacity: showInfo,
-          fontSize: ".875rem",
-          backgroundColor: "rgba(255,255,255,.85)",
-          backgroundClip: "padding-box",
-          border: "1px solid rgba(0,0,0,.1)",
-          boxShadow: "0 0.25rem 0.75rem rgba(0,0,0,.1)",
-          borderRadius: ".25rem",
-          backdropFilter: "blur(10px)"
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            padding: ".25rem .75rem",
-            color: "#6c757d",
-            borderBottom: "1px solid rgba(0,0,0,.05)"
-          }}
-        >
-          <img
-            src={props.house.houseImg}
-            style={{ width: "20px", height: "20px" }}
-            className="rounded-circle mr-2"
-          ></img>
-          <strong className="mr-auto">{props.house.houseName}</strong>
-          <small>${props.house.price}</small>
-          <span
-            onClick={() => {
-              setShowInfo(0);
-              console.log("toast close");
-            }}
-            style={{
-              cursor: "pointer",
-              boxSizing: "border-box",
-              fontSize: "1.5rem",
-              fontWeight: "700",
-              lineHeight: "1",
-              textShadow: "0 1px 0 #fff"
-            }}
-          >
-            x
-          </span>
-        </div>
-        <div style={{ padding: ".75rem" }}>{props.house.description}</div>
-      </div>
+      <div style={markerState} onClick={() => toggleShow()} />
+      <div className="pulse" onClick={() => toggleShow()}></div>
+
       <Toast
-        style={{ position: "absolute", width: "300px" }}
+        style={{ position: "absolute", width: "300px", zIndex: "1" }}
         onClose={() => setShow(false)}
         show={show}
-        // delay={3000}
-        // autohide
+        delay={3000}
+        autohide
       >
         <Toast.Header>
           <img
@@ -110,7 +52,7 @@ const MapMarker = props => {
             className="rounded-circle mr-2"
           ></img>
           <strong className="mr-auto">{props.house.houseName}</strong>
-          <small>${props.house.price}</small>
+          <small>${props.house.price}/night</small>
         </Toast.Header>
         <Toast.Body>{props.house.description}</Toast.Body>
       </Toast>
