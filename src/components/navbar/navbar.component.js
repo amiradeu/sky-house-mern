@@ -14,6 +14,7 @@ class Navigation extends Component {
             <Nav.Link href="/houses">Houses</Nav.Link>
             <Nav.Link href="/owners">Owners</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
+            <Nav.Link href="/register">Register</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -9,6 +9,7 @@ import Navbar from "./components/navbar/navbar.component";
 import Houses from "./components/houses/houses.component";
 import AddHouse from "./components/houses/add-house.component";
 import EditHouse from "./components/houses/edit-house.component";
+import RegisterOwner from "./components/owners/register-owner.component";
 import Owners from "./components/owners/owners.component";
 import AddOwner from "./components/owners/add-owner.component";
 import EditOwner from "./components/owners/edit-owner.component";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/owners/add" exact component={AddOwner} />
           <Route path="/owners/edit/:id" component={EditOwner} />
           <Route path="/about" exact component={About} />
+          <Route path="/register" exact component={RegisterOwner} />
         </Container>
       </React.Fragment>
     </Router>

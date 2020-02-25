@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Toast, Button } from "react-bootstrap";
+import { Toast } from "react-bootstrap";
 import marker from "../../assets/images/marker.png";
 import markerHover from "../../assets/images/marker-hover.png";
 import "./marker.css";
@@ -50,7 +50,8 @@ const MapMarker = props => {
             src={props.house.houseImg}
             style={{ width: "20px", height: "20px" }}
             className="rounded-circle mr-2"
-          ></img>
+            alt="house"
+          />
           <strong className="mr-auto">{props.house.houseName}</strong>
           <small>${props.house.price}/night</small>
         </Toast.Header>
