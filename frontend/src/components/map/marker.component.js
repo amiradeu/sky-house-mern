@@ -30,7 +30,7 @@ const markerStyleHover = {
 
 const MapMarker = props => {
   const markerState = props.$hover ? markerStyleHover : markerStyle;
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const toggleShow = () => setShow(!show);
 
   return (

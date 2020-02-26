@@ -1,6 +1,5 @@
 #loginCard {
-  border-radius: 10px;
-  margin: auto;
+  border-radius: 50px;
   border: 1px solid #debccc;
   height: 80vh;
   margin-top: 20px;
@@ -8,28 +7,107 @@
 
 #loginInfo {
   margin: auto;
-  text-align: center;
 }
 
 #loginInfo h1 {
   font-weight: 900;
-  color: #dd3352;
+  color: #debccc;
+  text-align: center;
+}
+
+#loginInfo .form-label {
+  margin: 0 0 0 25px;
+}
+
+.loginInput {
+  border-radius: 30px;
+  padding: 25px;
+  background: linear-gradient(to left, #fff 50%, rgb(222, 188, 204, 0.2) 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.8s ease;
+}
+
+.loginInput:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-position: left bottom;
+}
+
+.loginBtn {
+  border-radius: 50px;
+  padding: 20px;
+  width: 100%;
+}
+
+#loginFooter {
+  padding-top: 10px;
+  text-align: center;
+}
+
+#toggleFooter {
+  padding-left: 10px;
+  color: #5c9fe0;
+  font-weight: 600;
+}
+
+#toggleFooter:hover {
+  text-decoration: none;
+  padding-left: 10px;
+  color: #debccc;
+  cursor: pointer;
+}
+
+#loginBannerOverlay {
+  padding: 0;
+  border-radius: 0 50px 50px 0px;
+  background: rgba(0, 0, 0);
+  height: 80vh;
 }
 
 #loginBanner {
   background-image: url("https://images.unsplash.com/photo-1505819244306-ef53954f9648?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=60");
   background-size: cover;
   background-position: center;
-  border-radius: 0 10px 10px 0px;
+  border-radius: 0 50px 50px 0px;
   height: 80vh;
   opacity: 0.8;
 }
 
-#loginBanner h1 {
-  margin: 15px;
+#loginBannerText {
+  position: relative;
+  bottom: 13em;
+  padding: 20px;
   text-transform: capitalize;
   font-weight: 900;
   color: #fff;
+}
+
+@keyframes scale {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scales {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.cardContainer {
+  animation: scale 1s ease-in-out 1 forwards;
+}
+
+.cardContainer--open {
+  animation: scales 1s ease-in-out 1 forwards;
 }
 
 /*
