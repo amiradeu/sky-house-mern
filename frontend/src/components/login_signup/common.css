@@ -30,6 +30,10 @@
   transition: all 0.8s ease;
 }
 
+.loginInput::placeholder {
+  font-size: 12px;
+}
+
 .loginInput:focus {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;

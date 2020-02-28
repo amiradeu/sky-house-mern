@@ -8,7 +8,7 @@ function Common({ cardText, cardFooter, cardToggle, cardBanner }) {
       <Row>
         <Col sm={5} id="loginInfo">
           <h1>{cardText}</h1>
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Group>
             <Form.Control
               required
@@ -16,6 +16,7 @@ function Common({ cardText, cardFooter, cardToggle, cardBanner }) {
               name="email"
               className="loginInput"
               autoComplete="off"
+              placeholder="Enter a unique name or email"
             />
           </Form.Group>
           <Form.Label>Password</Form.Label>
@@ -26,6 +27,7 @@ function Common({ cardText, cardFooter, cardToggle, cardBanner }) {
               name="password"
               className="loginInput"
               autoComplete="off"
+              placeholder="Enter a secure password"
             />
           </Form.Group>
           <button className="btn btn-dark loginBtn">{cardText}</button>
