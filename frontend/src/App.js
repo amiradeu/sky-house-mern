@@ -24,10 +24,10 @@ function App() {
         <Route exact path="/" component={Signup}>
           <Redirect to="/signup" />
         </Route>
+        <Route exact path="/map" component={Map} />
         <Container fluid>
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/map" component={Map} />
           <Route exact path="/houses/" component={Houses} />
           <Route exact path="/houses/add" component={AddHouse} />
           <Route path="/houses/edit/:id" component={EditHouse} />
