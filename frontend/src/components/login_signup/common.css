@@ -3,6 +3,7 @@
   border: 1px solid #debccc;
   height: 80vh;
   margin-top: 20px;
+  animation: scale 1s ease-in-out 1 forwards;
 }
 
 #loginInfo {
@@ -13,6 +14,7 @@
   font-weight: 900;
   color: #debccc;
   text-align: center;
+  text-transform: capitalize;
 }
 
 #loginInfo .form-label {
@@ -91,23 +93,6 @@
   100% {
     opacity: 1;
   }
-}
-
-@keyframes scales {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.cardContainer {
-  animation: scale 1s ease-in-out 1 forwards;
-}
-
-.cardContainer--open {
-  animation: scales 1s ease-in-out 1 forwards;
 }
 
 /*
