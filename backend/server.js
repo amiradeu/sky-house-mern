@@ -1,6 +1,6 @@
-const express = require("express");
+const express = require("express"); // simplify routing, request handling, response etc
 const cors = require("cors"); // cross-origin resource sharing
-const mongoose = require("mongoose"); //help connect to mongoDB database
+const mongoose = require("mongoose"); // help connect to mongoDB database
 
 //store environment variable in .env file
 require("dotenv").config();

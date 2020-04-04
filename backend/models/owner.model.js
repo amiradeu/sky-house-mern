@@ -33,6 +33,8 @@ ownerSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
+// ownerSchema.pre("save", function(next) {});
+
 ownerSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
